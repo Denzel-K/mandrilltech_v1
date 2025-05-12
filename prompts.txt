@@ -1,0 +1,7 @@
+Redesign the expertise section to use tabs instead of a sidebar. I also feel like the "Fullstack web development" category covers to much space by dividing into frontend and backend, it looks a bit too much with the way things are aligned from top to bottom. Can you make it and all other categories look more compact? The icons are also a bit overdone, can you tone them down a bit? 
+
+Since we are now using tabs instead of a sidebar, add a description to each category, reduce the space occupied by the technologies/frameworks/tools/languages/libraries, and make the categories into an animated, responsive and controlable slideshow.
+
+Also, double down on the linear gradients accross the website, not every text/title or button should have a linear gradient. Instead, use the individual mandrill colors hierarchically where necessary.
+
+And good job on the business page, everything flows well. Just remove the testimonials section and make the contact section more compact. The left contact information panel covers to much space.
