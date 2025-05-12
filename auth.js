@@ -5,6 +5,7 @@ import User from "@/app/lib/models/User";
 import bcrypt from "bcryptjs";
 
 export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
+  debug: process.env.NODE_ENV === 'development',
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -56,11 +57,16 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      if (token && session.user) {
-        session.user.id = token.id;
-        session.user.role = token.role;
+      try {
+        if (token && session.user) {
+          session.user.id = token.id;
+          session.user.role = token.role;
+        }
+        return session;
+      } catch (error) {
+        console.error("Session callback error:", error);
+        return session;
       }
-      return session;
     },
   },
   pages: {

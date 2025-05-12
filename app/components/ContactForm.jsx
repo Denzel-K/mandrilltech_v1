@@ -162,7 +162,7 @@ const ContactForm = () => {
                 </p>
                 <button
                   onClick={() => setSubmitSuccess(false)}
-                  className="btn px-6 py-3 rounded-full bg-gradient-to-r from-primary to-secondary text-white"
+                  className="btn px-6 py-3 rounded-full bg-primary text-white"
                 >
                   Send Another Message
                 </button>
@@ -274,7 +274,7 @@ const ContactForm = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="btn px-6 py-3 rounded-full bg-gradient-to-r from-primary to-secondary text-white disabled:opacity-70 flex items-center justify-center"
+                    className="btn px-6 py-3 rounded-full bg-primary text-white disabled:opacity-70 flex items-center justify-center"
                   >
                     {isSubmitting ? (
                       <>

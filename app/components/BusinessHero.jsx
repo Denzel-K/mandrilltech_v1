@@ -74,7 +74,7 @@ const BusinessHero = () => {
             >
               <Link
                 href="#services"
-                className="btn px-6 py-3 rounded-full bg-gradient-to-r from-primary to-secondary text-white"
+                className="btn px-6 py-3 rounded-full bg-primary text-white"
               >
                 Explore Services
               </Link>

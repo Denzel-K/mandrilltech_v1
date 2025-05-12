@@ -23,17 +23,18 @@ export default function Login() {
     setError("");
 
     try {
-      // Use a simpler approach for NextAuth v5
-      await signIn("credentials", {
+      const result = await signIn("credentials", {
         email: data.email,
         password: data.password,
-        redirect: true,
-        callbackUrl: "/admin"
+        redirect: false
       });
 
-      // The above will redirect automatically if successful
-      // If we get here, there was an error but it wasn't thrown
-      setError("Authentication failed. Please check your credentials.");
+      if (result?.error) {
+        setError("Authentication failed. Please check your credentials.");
+      } else {
+        // Successful login, redirect to admin dashboard
+        router.push("/admin");
+      }
     } catch (error) {
       console.error("Login error:", error);
       setError("An unexpected error occurred. Please try again.");

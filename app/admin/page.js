@@ -1,16 +1,28 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSession, signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { redirect } from "next/navigation";
+import { auth } from "@/auth";
 
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { FaHome, FaFolder, FaEnvelope, FaArrowLeft, FaSignOutAlt, FaBox, FaBell } from "react-icons/fa";
 import { GiMonkey } from "react-icons/gi";
 
-export default function AdminDashboard() {
-  const { data: session, status } = useSession();
+export default async function AdminDashboard() {
+  const session = await auth();
+
+  // Server-side redirect if not authenticated
+  if (!session) {
+    redirect("/admin/login");
+  }
+
+  return <AdminDashboardClient session={session} />;
+}
+
+// Client component
+function AdminDashboardClient({ session }) {
   const [stats, setStats] = useState({
     totalProjects: 0,
     totalMessages: 0,
@@ -19,15 +31,10 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (status === "unauthenticated") {
-      redirect("/admin/login");
-    } else if (status === "authenticated") {
-      fetchStats();
-    }
-  }, [status]);
+    fetchStats();
+  }, []);
 
-  // Add a safety check for authentication
-  if (status === "loading" || status !== "authenticated") {
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
@@ -69,13 +76,7 @@ export default function AdminDashboard() {
     }
   };
 
-  if (status === "loading" || loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
+  // Loading state is handled above
 
   return (
     <div className="min-h-screen bg-background">

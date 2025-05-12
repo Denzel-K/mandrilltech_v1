@@ -4,4 +4,4 @@ Since we are now using tabs instead of a sidebar, add a description to each cate
 
 Also, double down on the linear gradients accross the website, not every text/title or button should have a linear gradient. Instead, use the individual mandrill colors hierarchically where necessary.
 
-And good job on the business page, everything flows well. Just remove the testimonials section and make the contact section more compact. The left contact information panel covers to much space.
+For the business page, everything flows well. Just remove the testimonials section and make the contact section more compact. The left contact information panel covers to much space.
