@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FaEnvelope, FaPhone, FaClock, FaCheckCircle, FaMapMarkerAlt } from "react-icons/fa";
+import { FaCheckCircle, FaMapMarkerAlt, FaInfoCircle } from "react-icons/fa";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -135,57 +135,10 @@ const ContactFormCompact = () => {
           </p>
         </motion.div>
 
-        <div className="glass p-6 md:p-8 rounded-xl max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Contact Info - Now in a horizontal layout */}
-            <div className="md:col-span-1">
-              <div className="flex flex-col space-y-4">
-                <div className="flex items-center">
-                  <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-primary/10 mr-3">
-                    <FaEnvelope className="h-4 w-4 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-medium">Email</h4>
-                    <a
-                      href="mailto:denzelk741@gmail.com"
-                      className="text-sm text-foreground/70 hover:text-primary transition-colors"
-                    >
-                      denzelk741@gmail.com
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-center">
-                  <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-primary/10 mr-3">
-                    <FaPhone className="h-4 w-4 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-medium">Phone</h4>
-                    <a
-                      href="tel:+254110725965"
-                      className="text-sm text-foreground/70 hover:text-primary transition-colors"
-                    >
-                      +254 110 725 965
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-center">
-                  <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-primary/10 mr-3">
-                    <FaClock className="h-4 w-4 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-medium">Working Hours</h4>
-                    <p className="text-sm text-foreground/70">
-                      Mon - Fri: 9AM - 6PM (EAT)
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
+        <div className="glass p-6 md:p-8 rounded-xl max-w-3xl mx-auto">
+          <div>
             {/* Contact Form */}
-            <div className="md:col-span-2">
+            <div>
               {submitSuccess ? (
                 <div className="text-center py-8">
                   <FaCheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" />
@@ -323,40 +276,54 @@ const ContactFormCompact = () => {
                     </div>
                   )}
 
-                  <div className="text-right">
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="btn px-5 py-2 rounded-full bg-primary text-white disabled:opacity-70 inline-flex items-center justify-center text-sm"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <svg
-                            className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <circle
-                              className="opacity-25"
-                              cx="12"
-                              cy="12"
-                              r="10"
-                              stroke="currentColor"
-                              strokeWidth="4"
-                            ></circle>
-                            <path
-                              className="opacity-75"
-                              fill="currentColor"
-                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                            ></path>
-                          </svg>
-                          Sending...
-                        </>
-                      ) : (
-                        "Send Message"
-                      )}
-                    </button>
+                  <div className="flex flex-col">
+                    <div className="text-center">
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="btn px-16 py-2 rounded-full bg-primary text-white disabled:opacity-70 inline-flex items-center justify-center text-sm"
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <svg
+                              className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                            >
+                              <circle
+                                className="opacity-25"
+                                cx="12"
+                                cy="12"
+                                r="10"
+                                stroke="currentColor"
+                                strokeWidth="4"
+                              ></circle>
+                              <path
+                                className="opacity-75"
+                                fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                              ></path>
+                            </svg>
+                            Sending...
+                          </>
+                        ) : (
+                          "Send Message"
+                        )}
+                      </button>
+                    </div>
+
+                    <div className="mt-6 p-4 bg-primary/5 rounded-lg border border-primary/10">
+                      <div className="flex items-start">
+                        <FaInfoCircle className="text-primary mt-1 mr-2 flex-shrink-0" />
+                        <p className="text-xs text-foreground/70 leading-relaxed opacity-50">
+                          When you submit this form, your message will be stored in my secure database.
+                          I'll receive a notification and respond to your inquiry via email as soon as possible,
+                          typically within 24 hours during business days. Your contact information will only be
+                          used to respond to your inquiry and will not be shared with third parties.
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </form>
               )}

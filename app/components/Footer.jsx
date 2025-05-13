@@ -25,11 +25,11 @@ const Footer = () => {
       url: "https://www.instagram.com/i_denzel_k/",
       icon: FaInstagram,
     },
-    {
-      name: "Upwork",
-      url: "https://www.upwork.com/freelancers/~01c4f9a98e72c97f34?viewMode=1",
-      icon: SiUpwork,
-    },
+    // {
+    //   name: "Upwork",
+    //   url: "https://www.upwork.com/freelancers/~01c4f9a98e72c97f34?viewMode=1",
+    //   icon: SiUpwork,
+    // },
     {
       name: "WhatsApp",
       url: "https://wa.me/qr/WGRJEI7HI2J4E1",

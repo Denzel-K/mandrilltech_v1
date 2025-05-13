@@ -13,6 +13,7 @@ import {
   SiTailwindcss, SiGithub
 } from "react-icons/si";
 import { HiCode, HiTerminal } from "react-icons/hi";
+import AnimatedArrow from "./AnimatedArrow";
 import styles from "./BusinessHero.module.css";
 
 const BusinessHero = () => {
@@ -110,6 +111,9 @@ const BusinessHero = () => {
           <icon.Icon size={icon.size} />
         </motion.div>
       ))}
+
+      {/* Animated scroll down arrow */}
+      {/* <AnimatedArrow /> */}
 
       {/* Content Container */}
       <div className={styles.contentContainer}>

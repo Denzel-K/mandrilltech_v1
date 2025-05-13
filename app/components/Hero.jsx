@@ -6,6 +6,7 @@ import Link from "next/link";
 import { FaLinkedinIn, FaGithub, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { GiMonkey } from "react-icons/gi";
 import { SiUpwork } from "react-icons/si";
+import AnimatedArrow from "./AnimatedArrow";
 
 const Hero = () => {
   const containerVariants = {
@@ -46,11 +47,11 @@ const Hero = () => {
       url: "https://www.instagram.com/i_denzel_k/",
       icon: FaInstagram,
     },
-    {
-      name: "Upwork",
-      url: "https://www.upwork.com/freelancers/~01c4f9a98e72c97f34?viewMode=1",
-      icon: SiUpwork,
-    },
+    // {
+    //   name: "Upwork",
+    //   url: "https://www.upwork.com/freelancers/~01c4f9a98e72c97f34?viewMode=1",
+    //   icon: SiUpwork,
+    // },
     {
       name: "WhatsApp",
       url: "https://wa.me/qr/WGRJEI7HI2J4E1",
@@ -69,6 +70,8 @@ const Hero = () => {
       {/* Mandrill Face Image - positioned to cover right side */}
       <div className="absolute top-0 right-0 bottom-0 w-full lg:w-1/2 -z-5 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-l from-transparent to-background z-10"></div>
+        {/* Mobile blur overlay - only visible on tablet and mobile */}
+        <div className="lg:hidden hero-mobile-overlay"></div>
         <Image
           src="/mandrill-face-left.jpg"
           alt="Mandrill Face"
@@ -78,6 +81,9 @@ const Hero = () => {
           style={{ maskImage: 'linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0))' }}
         />
       </div>
+
+      {/* Animated scroll down arrow */}
+      {/* <AnimatedArrow /> */}
 
       <div className="container mx-auto px-4 md:px-6 py-12 md:py-24 relative z-10">
         <motion.div
