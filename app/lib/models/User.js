@@ -45,4 +45,19 @@ UserSchema.methods.comparePassword = async function (enteredPassword) {
 };
 
 // Check if the model is already defined to prevent overwriting during hot reloads
-export default mongoose.models.User || mongoose.model('User', UserSchema);
+let User;
+
+// Check if we're in an environment where mongoose is fully available
+if (mongoose && mongoose.models) {
+  User = mongoose.models.User || mongoose.model('User', UserSchema);
+} else {
+  // For Edge runtime or other environments where mongoose is not fully available
+  console.warn("Mongoose models not available, using placeholder User model");
+  User = {
+    findOne: () => null,
+    findById: () => null,
+    create: () => null
+  };
+}
+
+export default User;

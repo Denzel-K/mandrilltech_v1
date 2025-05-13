@@ -47,4 +47,20 @@ const MessageSchema = new mongoose.Schema({
 });
 
 // Check if the model is already defined to prevent overwriting during hot reloads
-export default mongoose.models.Message || mongoose.model('Message', MessageSchema);
+let Message;
+
+// Check if we're in an environment where mongoose is fully available
+if (mongoose && mongoose.models) {
+  Message = mongoose.models.Message || mongoose.model('Message', MessageSchema);
+} else {
+  // For Edge runtime or other environments where mongoose is not fully available
+  console.warn("Mongoose models not available, using placeholder Message model");
+  Message = {
+    find: () => [],
+    findById: () => null,
+    create: () => null,
+    findByIdAndUpdate: () => null
+  };
+}
+
+export default Message;

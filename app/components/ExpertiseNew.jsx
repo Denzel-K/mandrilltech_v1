@@ -78,7 +78,7 @@ const ExpertiseNew = () => {
   const categories = [
     {
       id: "web",
-      name: "Full Stack Web Development",
+      name: "Web Development",
       icon: <FaLaptopCode />,
       description: "Building responsive, scalable web applications from frontend to backend with modern technologies and best practices.",
       skills: [
@@ -101,7 +101,7 @@ const ExpertiseNew = () => {
     },
     {
       id: "mobile",
-      name: "Mobile App Development",
+      name: "Mobile Development",
       icon: <FaMobile />,
       description: "Creating cross-platform mobile applications with native-like performance and seamless user experiences.",
       skills: [
@@ -115,7 +115,7 @@ const ExpertiseNew = () => {
     },
     {
       id: "desktop",
-      name: "Desktop App Development",
+      name: "Desktop Development",
       icon: <FaDesktop />,
       description: "Developing cross-platform desktop applications with web technologies for Windows, macOS, and Linux.",
       skills: [

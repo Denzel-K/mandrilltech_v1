@@ -44,4 +44,21 @@ const ProjectSchema = new mongoose.Schema({
 });
 
 // Check if the model is already defined to prevent overwriting during hot reloads
-export default mongoose.models.Project || mongoose.model('Project', ProjectSchema);
+let Project;
+
+// Check if we're in an environment where mongoose is fully available
+if (mongoose && mongoose.models) {
+  Project = mongoose.models.Project || mongoose.model('Project', ProjectSchema);
+} else {
+  // For Edge runtime or other environments where mongoose is not fully available
+  console.warn("Mongoose models not available, using placeholder Project model");
+  Project = {
+    find: () => [],
+    findById: () => null,
+    create: () => null,
+    findByIdAndUpdate: () => null,
+    findByIdAndDelete: () => null
+  };
+}
+
+export default Project;

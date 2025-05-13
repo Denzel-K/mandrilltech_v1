@@ -1,7 +1,10 @@
-Redesign the expertise section to use tabs instead of a sidebar. I also feel like the "Fullstack web development" category covers to much space by dividing into frontend and backend, it looks a bit too much with the way things are aligned from top to bottom. Can you make it and all other categories look more compact? The icons are also a bit overdone, can you tone them down a bit? 
+1. Use mandrill-vector.svg as my logo. 
+2. Redesign the hero section on the landing page to use the mandrill-face-left.jpg image and ensure that the layout looks like the joker-hero-section. Keep the header and everything else on the landing page as they are - just redesin the hero section. Ensure that the image boundaries of the mandrill-face-left.jpg image are not visible - let the image flow into the background smoothly.
+3. Redesign the hero section of the business page to use the High-Tech-Workstation.jpg image as the background, and let the text description be at the center of the image. Ensure that viewers can contrast the text from the baskground image, so use a mild, subtle blur effect on the image to achieve this.
 
-Since we are now using tabs instead of a sidebar, add a description to each category, reduce the space occupied by the technologies/frameworks/tools/languages/libraries, and make the categories into an animated, responsive and controlable slideshow.
+I have attached the joker-hero-section for reference and downloaded the required images in the public folder.
 
-Also, double down on the linear gradients accross the website, not every text/title or button should have a linear gradient. Instead, use the individual mandrill colors hierarchically where necessary.
+Ensure that the above modifications do not break the existing functionality of the website and let them be fully responsive, intearractive and beautiful. Do not overimplement linear gradients to text and buttons, be subtle.
 
-For the business page, everything flows well. Just remove the testimonials section and make the contact section more compact. The left contact information panel covers to much space.
+NOTE:
+    DO NOT BREAK THE ALREADY WORKING TAILWIND CONFIGURATION.

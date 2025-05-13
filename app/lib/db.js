@@ -2,6 +2,9 @@ import mongoose from 'mongoose';
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
+// Check if we're in an Edge runtime environment
+const isEdgeRuntime = typeof EdgeRuntime !== 'undefined';
+
 /**
  * Global is used here to maintain a cached connection across hot reloads
  * in development. This prevents connections growing exponentially
@@ -14,6 +17,12 @@ if (!cached) {
 }
 
 async function connectToDatabase() {
+  // Skip database connection in Edge runtime
+  if (isEdgeRuntime) {
+    console.warn("Edge runtime detected, skipping database connection");
+    return null;
+  }
+
   // Check if MongoDB URI is defined
   if (!MONGODB_URI) {
     console.warn('MONGODB_URI is not defined in .env.local');

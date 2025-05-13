@@ -23,18 +23,16 @@ export default function Login() {
     setError("");
 
     try {
-      const result = await signIn("credentials", {
+      // Use the simplest approach with redirect: true
+      await signIn("credentials", {
         email: data.email,
         password: data.password,
-        redirect: false
+        callbackUrl: "/admin",
+        redirect: true
       });
 
-      if (result?.error) {
-        setError("Authentication failed. Please check your credentials.");
-      } else {
-        // Successful login, redirect to admin dashboard
-        router.push("/admin");
-      }
+      // If we get here, there was an error but it wasn't thrown
+      setError("Authentication failed. Please check your credentials.");
     } catch (error) {
       console.error("Login error:", error);
       setError("An unexpected error occurred. Please try again.");
@@ -121,7 +119,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full px-6 py-3 rounded-full bg-gradient-to-r from-primary to-secondary text-white hover:opacity-90 transition-opacity disabled:opacity-70 flex items-center justify-center"
+            className="w-full px-6 py-3 rounded-full bg-primary text-white hover:opacity-90 transition-opacity disabled:opacity-70 flex items-center justify-center"
           >
             {isLoading ? (
               <>

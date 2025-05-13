@@ -5,7 +5,6 @@ import User from "@/app/lib/models/User";
 import bcrypt from "bcryptjs";
 
 export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
-  debug: process.env.NODE_ENV === 'development',
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -48,6 +47,10 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
       },
     }),
   ],
+  pages: {
+    signIn: "/admin/login",
+    error: "/admin/login",
+  },
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
@@ -57,25 +60,17 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      try {
-        if (token && session.user) {
-          session.user.id = token.id;
-          session.user.role = token.role;
-        }
-        return session;
-      } catch (error) {
-        console.error("Session callback error:", error);
-        return session;
+      if (token && session.user) {
+        session.user.id = token.id;
+        session.user.role = token.role;
       }
+      return session;
     },
-  },
-  pages: {
-    signIn: "/admin/login",
-    error: "/admin/login",
   },
   session: {
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   secret: process.env.NEXTAUTH_SECRET,
+  debug: process.env.NODE_ENV === 'development',
 });

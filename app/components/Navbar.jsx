@@ -67,8 +67,14 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-r from-primary to-secondary rounded-full">
-              <GiMonkey className="w-6 h-6 text-white" />
+            <div className="w-10 h-10 flex items-center justify-center">
+              <Image
+                src="/icons/mandrill-vector.svg"
+                alt="Mandrill Technologies Logo"
+                width={40}
+                height={40}
+                className="w-full h-full object-contain"
+              />
             </div>
             <span className="text-xl font-bold text-gradient-full">
               Mandrill Tech

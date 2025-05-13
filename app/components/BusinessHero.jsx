@@ -30,22 +30,28 @@ const BusinessHero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-      {/* Background Elements */}
+      {/* High-Tech Workstation Background Image */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-20 right-10 w-72 h-72 bg-primary/20 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-20 left-10 w-72 h-72 bg-secondary/20 rounded-full filter blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/10 rounded-full filter blur-3xl"></div>
+        <Image
+          src="/High-Tech-Workstation.jpg"
+          alt="High Tech Workstation"
+          fill
+          priority
+          className="object-cover object-center"
+        />
+        {/* Overlay with blur for better text readability */}
+        <div className="absolute inset-0 bg-background/50 backdrop-blur-sm"></div>
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 py-12 md:py-24">
+      <div className="container mx-auto px-4 md:px-6 py-12 md:py-24 relative z-10">
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+          className="flex flex-col items-center text-center max-w-4xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {/* Text Content */}
-          <motion.div variants={itemVariants}>
+          {/* Text Content - Centered */}
+          <motion.div variants={itemVariants} className="glass p-8 md:p-12 rounded-2xl backdrop-blur-md">
             <motion.h1
               variants={itemVariants}
               className="text-4xl md:text-6xl font-bold mb-6 text-gradient-full"
@@ -60,7 +66,7 @@ const BusinessHero = () => {
             </motion.h2>
             <motion.p
               variants={itemVariants}
-              className="text-lg mb-8 max-w-xl text-foreground/80"
+              className="text-lg mb-8 max-w-3xl mx-auto text-foreground/90"
             >
               From developing responsive websites and mobile apps that provide
               seamless user experiences to integrating advanced analytics tools
@@ -70,36 +76,21 @@ const BusinessHero = () => {
 
             <motion.div
               variants={itemVariants}
-              className="flex flex-wrap gap-4 mb-8"
+              className="flex flex-wrap gap-4 justify-center mb-4"
             >
               <Link
                 href="#services"
-                className="btn px-6 py-3 rounded-full bg-primary text-white"
+                className="btn px-6 py-3 rounded-full bg-primary text-white hover:opacity-90 transition-all"
               >
                 Explore Services
               </Link>
               <Link
                 href="#contact"
-                className="btn px-6 py-3 rounded-full glass border border-primary/30"
+                className="btn px-6 py-3 rounded-full glass border border-primary/30 hover:bg-primary/10 transition-all"
               >
                 Contact Me
               </Link>
             </motion.div>
-          </motion.div>
-
-          {/* Image/Illustration */}
-          <motion.div
-            variants={itemVariants}
-            className="flex justify-center"
-          >
-            <div className="relative w-full h-80 md:h-96 flex items-center justify-center">
-              <div className="absolute w-72 h-72 rounded-full bg-gradient-to-br from-primary/30 via-secondary/30 to-accent/30 filter blur-xl"></div>
-              <div className="relative z-10 w-64 h-64 glass rounded-full flex items-center justify-center">
-                <div className="w-48 h-48 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center">
-                  <GiMonkey className="w-32 h-32 text-white" />
-                </div>
-              </div>
-            </div>
           </motion.div>
         </motion.div>
       </div>

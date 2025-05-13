@@ -64,10 +64,22 @@ const Hero = () => {
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full filter blur-3xl"></div>
         <div className="absolute bottom-20 right-10 w-72 h-72 bg-secondary/20 rounded-full filter blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/10 rounded-full filter blur-3xl"></div>
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 py-12 md:py-24">
+      {/* Mandrill Face Image - positioned to cover right side */}
+      <div className="absolute top-0 right-0 bottom-0 w-full lg:w-1/2 -z-5 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-l from-transparent to-background z-10"></div>
+        <Image
+          src="/mandrill-face-left.jpg"
+          alt="Mandrill Face"
+          fill
+          priority
+          className="object-cover object-center opacity-80"
+          style={{ maskImage: 'linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0))' }}
+        />
+      </div>
+
+      <div className="container mx-auto px-4 md:px-6 py-12 md:py-24 relative z-10">
         <motion.div
           className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
           variants={containerVariants}
@@ -75,7 +87,7 @@ const Hero = () => {
           animate="visible"
         >
           {/* Text Content */}
-          <motion.div variants={itemVariants} className="order-2 lg:order-1">
+          <motion.div variants={itemVariants} className="z-20">
             <motion.p
               variants={itemVariants}
               className="text-primary font-mono mb-2"
@@ -109,13 +121,13 @@ const Hero = () => {
             >
               <Link
                 href="/business"
-                className="btn px-6 py-3 rounded-full bg-primary text-white"
+                className="btn px-6 py-3 rounded-full bg-primary text-white hover:opacity-90 transition-all"
               >
                 Hire Me
               </Link>
               <Link
                 href="#projects"
-                className="btn px-6 py-3 rounded-full glass border border-primary/30"
+                className="btn px-6 py-3 rounded-full glass border border-primary/30 hover:bg-primary/10 transition-all"
               >
                 View Projects
               </Link>
@@ -147,18 +159,11 @@ const Hero = () => {
             </motion.div>
           </motion.div>
 
-          {/* Image/Illustration */}
+          {/* Empty div to maintain grid layout */}
           <motion.div
             variants={itemVariants}
-            className="order-1 lg:order-2 flex justify-center"
-          >
-            <div className="relative w-64 h-64 md:w-96 md:h-96">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full filter blur-xl"></div>
-              <div className="relative w-full h-full glass rounded-full overflow-hidden border border-white/10 flex items-center justify-center bg-gradient-to-br from-primary/30 to-secondary/30">
-                <GiMonkey className="w-32 h-32 text-white/70" />
-              </div>
-            </div>
-          </motion.div>
+            className="hidden lg:block"
+          />
         </motion.div>
       </div>
     </section>
