@@ -4,8 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { FaHome, FaFolder, FaEnvelope, FaArrowLeft, FaSignOutAlt, FaSave, FaTimes } from "react-icons/fa";
-import { GiMonkey } from "react-icons/gi";
+import { FaArrowLeft, FaSave, FaTimes } from "react-icons/fa";
+import AdminLayout from "@/app/components/admin/AdminLayout";
 
 export default function NewProjectPage() {
   const router = useRouter();
@@ -153,107 +153,8 @@ export default function NewProjectPage() {
   // Loading state is handled in the parent component
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="flex flex-col lg:flex-row">
-        {/* Mobile Header */}
-        <div className="lg:hidden sticky top-0 z-30 w-full glass p-4 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 flex items-center justify-center">
-              <Image
-                src="/icons/mandrill-vector.svg"
-                alt="Mandrill Technologies Logo"
-                width={32}
-                height={32}
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <span className="text-lg font-bold text-gradient-full">
-              Admin Panel
-            </span>
-          </div>
-          <button
-            onClick={() => {
-              const sidebar = document.getElementById('admin-sidebar');
-              sidebar.classList.toggle('translate-x-0');
-              const isOpen = sidebar.classList.contains('translate-x-0');
-              document.getElementById('menu-icon').classList.toggle('hidden', isOpen);
-              document.getElementById('close-icon').classList.toggle('hidden', !isOpen);
-            }}
-            className="p-2 rounded-lg hover:bg-primary/10"
-          >
-            <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-            <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Sidebar */}
-        <div id="admin-sidebar" className="w-64 h-screen glass fixed left-0 top-0 p-6 z-40 -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
-          <div className="flex items-center space-x-2 mb-10">
-            <div className="w-10 h-10 flex items-center justify-center">
-              <Image
-                src="/icons/mandrill-vector.svg"
-                alt="Mandrill Technologies Logo"
-                width={40}
-                height={40}
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <span className="text-xl font-bold text-gradient-full">
-              Admin Panel
-            </span>
-          </div>
-
-          <nav className="space-y-2">
-            <Link
-              href="/admin"
-              className="flex items-center space-x-2 p-3 rounded-lg hover:bg-primary/10 transition-colors"
-              onClick={() => document.getElementById('admin-sidebar').classList.remove('translate-x-0')}
-            >
-              <FaHome className="h-5 w-5" />
-              <span>Dashboard</span>
-            </Link>
-            <Link
-              href="/admin/projects"
-              className="flex items-center space-x-2 p-3 rounded-lg bg-primary/10 text-primary"
-              onClick={() => document.getElementById('admin-sidebar').classList.remove('translate-x-0')}
-            >
-              <FaFolder className="h-5 w-5" />
-              <span>Projects</span>
-            </Link>
-            <Link
-              href="/admin/messages"
-              className="flex items-center space-x-2 p-3 rounded-lg hover:bg-primary/10 transition-colors"
-              onClick={() => document.getElementById('admin-sidebar').classList.remove('translate-x-0')}
-            >
-              <FaEnvelope className="h-5 w-5" />
-              <span>Messages</span>
-            </Link>
-          </nav>
-
-          <div className="absolute bottom-6 left-0 right-0 px-6">
-            <Link
-              href="/"
-              className="flex items-center space-x-2 p-3 rounded-lg hover:bg-primary/10 transition-colors"
-            >
-              <FaArrowLeft className="h-5 w-5" />
-              <span>Back to Site</span>
-            </Link>
-            <Link
-              href="/"
-              className="w-full mt-2 flex items-center space-x-2 p-3 rounded-lg hover:bg-red-500/10 text-red-500 transition-colors"
-            >
-              <FaSignOutAlt className="h-5 w-5" />
-              <span>Exit Admin</span>
-            </Link>
-          </div>
-        </div>
-
-        {/* Main Content */}
-        <div className="w-full lg:ml-64 p-4 lg:p-8">
+    <AdminLayout>
+      <div>
           <div className="flex justify-between items-center mb-8">
             <div>
               <h1 className="text-3xl font-bold mb-2">Add New Project</h1>
@@ -538,6 +439,6 @@ export default function NewProjectPage() {
           )}
         </div>
       </div>
-    </div>
+    </AdminLayout>
   );
 }

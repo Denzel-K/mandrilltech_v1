@@ -83,8 +83,8 @@ const BusinessHero = () => {
       {/* Background Image */}
       <div className={styles.backgroundImage}>
         <Image
-          src="/High-Tech-Workstation.jpg"
-          alt="High Tech Workstation"
+          src="/black-poly-pattern.jpg"
+          alt="Black Poly Pattern"
           fill
           priority
           className="object-cover object-center"

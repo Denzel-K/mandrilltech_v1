@@ -87,7 +87,7 @@ const Process = () => {
 
         <div className={styles.timelineContainer}>
           {/* Vertical timeline line */}
-          <div className={`${styles.timelineLine} hidden md:block`}></div>
+          <div className={styles.timelineLine}></div>
 
           <div className={styles.timelineItems}>
             {steps.map((step, index) => (
@@ -101,7 +101,7 @@ const Process = () => {
                   index % 2 === 0
                     ? styles.timelineItemLeft
                     : styles.timelineItemRight
-                } md:items-start`}
+                } lg:items-start`}
               >
                 {/* Content for left side (even index) or right side (odd index) */}
                 <div
