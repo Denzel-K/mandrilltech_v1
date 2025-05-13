@@ -1,13 +1,12 @@
 import { NextResponse } from "next/server";
 import connectToDatabase from "@/app/lib/db";
 import Project from "@/app/lib/models/Project";
-import { auth } from "@/auth";
 
 // GET a single project by ID
 export async function GET(request, { params }) {
   try {
     const { id } = params;
-    
+
     if (!id) {
       return NextResponse.json(
         { message: "Project ID is required" },

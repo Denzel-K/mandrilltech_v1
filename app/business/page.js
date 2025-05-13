@@ -1,7 +1,7 @@
 import Navbar from "@/app/components/Navbar";
 import BusinessHero from "@/app/components/BusinessHero";
 import Services from "@/app/components/Services";
-import ProcessTree from "@/app/components/ProcessTree";
+import Process from "@/app/components/Process";
 import ContactFormCompact from "@/app/components/ContactFormCompact";
 import Footer from "@/app/components/Footer";
 
@@ -17,7 +17,7 @@ export default function Business() {
       <main>
         <BusinessHero />
         <Services />
-        <ProcessTree />
+        <Process />
         <ContactFormCompact />
       </main>
       <Footer />

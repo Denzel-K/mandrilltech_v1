@@ -11,6 +11,14 @@ const MessageSchema = new mongoose.Schema({
     required: [true, 'Please provide your email'],
     match: [/^\S+@\S+\.\S+$/, 'Please provide a valid email address'],
   },
+  phone: {
+    type: String,
+    required: false,
+  },
+  location: {
+    type: String,
+    required: false,
+  },
   subject: {
     type: String,
     required: [true, 'Please provide a subject'],

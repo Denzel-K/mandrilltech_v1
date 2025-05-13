@@ -3,15 +3,52 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { GiMonkey } from "react-icons/gi";
+import {
+  FaCode, FaDatabase, FaServer, FaBrain, FaMobile,
+  FaDesktop, FaChartLine, FaRobot, FaCloud, FaCogs
+} from "react-icons/fa";
+import {
+  SiJavascript, SiReact, SiPython, SiNodedotjs,
+  SiMongodb, SiPostgresql, SiDocker, SiKubernetes,
+  SiTailwindcss, SiGithub
+} from "react-icons/si";
+import { HiCode, HiTerminal } from "react-icons/hi";
+import styles from "./BusinessHero.module.css";
 
 const BusinessHero = () => {
+  // Define floating icons with positions
+  const floatingIcons = [
+    { Icon: FaCode, size: 30, top: "15%", left: "10%", delay: 0 },
+    { Icon: SiJavascript, size: 24, top: "25%", left: "85%", delay: 2 },
+    { Icon: FaDatabase, size: 28, top: "65%", left: "15%", delay: 4 },
+    { Icon: SiReact, size: 32, top: "20%", left: "75%", delay: 1 },
+    { Icon: FaBrain, size: 26, top: "75%", left: "80%", delay: 3 },
+    { Icon: SiPython, size: 28, top: "35%", left: "5%", delay: 5 },
+    { Icon: FaServer, size: 24, top: "85%", left: "30%", delay: 2 },
+    { Icon: SiNodedotjs, size: 26, top: "10%", left: "30%", delay: 4 },
+    { Icon: FaMobile, size: 22, top: "60%", left: "90%", delay: 1 },
+    { Icon: SiMongodb, size: 30, top: "40%", left: "85%", delay: 3 },
+    { Icon: HiCode, size: 34, top: "80%", left: "10%", delay: 0 },
+    { Icon: SiPostgresql, size: 26, top: "30%", left: "20%", delay: 2 },
+    { Icon: FaDesktop, size: 24, top: "50%", left: "5%", delay: 4 },
+    { Icon: SiDocker, size: 28, top: "15%", left: "60%", delay: 1 },
+    { Icon: FaChartLine, size: 22, top: "70%", left: "60%", delay: 3 },
+    { Icon: SiKubernetes, size: 26, top: "25%", left: "40%", delay: 5 },
+    { Icon: FaRobot, size: 30, top: "55%", left: "75%", delay: 2 },
+    { Icon: SiTailwindcss, size: 24, top: "40%", left: "15%", delay: 4 },
+    { Icon: FaCloud, size: 28, top: "20%", left: "90%", delay: 1 },
+    { Icon: SiGithub, size: 26, top: "90%", left: "45%", delay: 3 },
+    { Icon: HiTerminal, size: 32, top: "10%", left: "45%", delay: 0 },
+    { Icon: FaCogs, size: 24, top: "45%", left: "60%", delay: 2 }
+  ];
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.1,
+        delayChildren: 0.3,
       },
     },
   };
@@ -23,15 +60,28 @@ const BusinessHero = () => {
       y: 0,
       transition: {
         duration: 0.5,
-        ease: "easeInOut",
+        ease: "easeOut",
       },
     },
   };
 
+  const iconVariants = {
+    hidden: { opacity: 0, scale: 0 },
+    visible: (delay) => ({
+      opacity: 0.7,
+      scale: 1,
+      transition: {
+        duration: 0.8,
+        delay: delay * 0.2,
+        ease: "easeOut",
+      },
+    }),
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-      {/* High-Tech Workstation Background Image */}
-      <div className="absolute inset-0 -z-10">
+    <section className={styles.heroSection}>
+      {/* Background Image */}
+      <div className={styles.backgroundImage}>
         <Image
           src="/High-Tech-Workstation.jpg"
           alt="High Tech Workstation"
@@ -39,58 +89,58 @@ const BusinessHero = () => {
           priority
           className="object-cover object-center"
         />
-        {/* Overlay with blur for better text readability */}
-        <div className="absolute inset-0 bg-background/50 backdrop-blur-sm"></div>
+        <div className={styles.overlay}></div>
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 py-12 md:py-24 relative z-10">
+      {/* Floating Icons */}
+      {floatingIcons.map((icon, index) => (
         <motion.div
-          className="flex flex-col items-center text-center max-w-4xl mx-auto"
+          key={index}
+          className={styles.floatingIcon}
+          style={{
+            top: icon.top,
+            left: icon.left,
+            animationDelay: `${icon.delay}s`,
+          }}
+          variants={iconVariants}
+          initial="hidden"
+          animate="visible"
+          custom={icon.delay}
+        >
+          <icon.Icon size={icon.size} />
+        </motion.div>
+      ))}
+
+      {/* Content Container */}
+      <div className={styles.contentContainer}>
+        <motion.div
+          className={styles.textContent}
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {/* Text Content - Centered */}
-          <motion.div variants={itemVariants} className="glass p-8 md:p-12 rounded-2xl backdrop-blur-md">
-            <motion.h1
-              variants={itemVariants}
-              className="text-4xl md:text-6xl font-bold mb-6 text-gradient-full"
-            >
-              Mandrill Technologies
-            </motion.h1>
-            <motion.h2
-              variants={itemVariants}
-              className="text-2xl md:text-3xl font-semibold mb-6"
-            >
-              Empowering Your Future with Digital Innovation
-            </motion.h2>
-            <motion.p
-              variants={itemVariants}
-              className="text-lg mb-8 max-w-3xl mx-auto text-foreground/90"
-            >
-              From developing responsive websites and mobile apps that provide
-              seamless user experiences to integrating advanced analytics tools
-              that track customer behavior, I ensure that your business stands
-              out in a competitive market.
-            </motion.p>
+          <motion.h1 variants={itemVariants} className={styles.title}>
+            Mandrill Technologies
+          </motion.h1>
 
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-wrap gap-4 justify-center mb-4"
-            >
-              <Link
-                href="#services"
-                className="btn px-6 py-3 rounded-full bg-primary text-white hover:opacity-90 transition-all"
-              >
-                Explore Services
-              </Link>
-              <Link
-                href="#contact"
-                className="btn px-6 py-3 rounded-full glass border border-primary/30 hover:bg-primary/10 transition-all"
-              >
-                Contact Me
-              </Link>
-            </motion.div>
+          <motion.h2 variants={itemVariants} className={styles.subtitle}>
+            Empowering Your Future with Digital Innovation
+          </motion.h2>
+
+          <motion.p variants={itemVariants} className={styles.description}>
+            From developing responsive websites and mobile apps that provide
+            seamless user experiences to integrating advanced analytics tools
+            that track customer behavior, I ensure that your business stands
+            out in a competitive market.
+          </motion.p>
+
+          <motion.div variants={itemVariants} className={styles.buttonContainer}>
+            <Link href="#services" className={styles.primaryButton}>
+              Explore Services
+            </Link>
+            <Link href="#contact" className={styles.secondaryButton}>
+              Contact Me
+            </Link>
           </motion.div>
         </motion.div>
       </div>

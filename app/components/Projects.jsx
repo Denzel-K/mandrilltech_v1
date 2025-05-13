@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { FiMonitor, FiSmartphone, FiLayers, FiGrid } from "react-icons/fi";
+import { FaDesktop } from "react-icons/fa";
+import styles from "./Projects.module.css";
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
@@ -40,7 +43,13 @@ const Projects = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const categories = ["All", "Web", "Mobile", "Desktop", "Other"];
+  const categories = [
+    { id: "All", label: "All", icon: <FiGrid className="mr-2" /> },
+    { id: "Web", label: "Web", icon: <FiMonitor className="mr-2" /> },
+    { id: "Mobile", label: "Mobile", icon: <FiSmartphone className="mr-2" /> },
+    { id: "Desktop", label: "Desktop", icon: <FaDesktop className="mr-2" /> },
+    { id: "Other", label: "Other", icon: <FiLayers className="mr-2" /> }
+  ];
 
   const filteredProjects =
     activeCategory === "All"
@@ -101,15 +110,16 @@ const Projects = () => {
         >
           {categories.map((category) => (
             <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`px-4 py-2 rounded-full transition-all ${
-                activeCategory === category
-                  ? "bg-gradient-to-r from-primary to-secondary text-white"
-                  : "glass border border-white/10 hover:border-primary/30"
+              key={category.id}
+              onClick={() => setActiveCategory(category.id)}
+              className={`px-4 py-2 rounded-full transition-all flex items-center ${
+                activeCategory === category.id
+                  ? "bg-primary text-white"
+                  : "glass border border-white/10 hover:border-primary/30 hover:bg-primary/5"
               }`}
             >
-              {category}
+              {category.icon}
+              {category.label}
             </button>
           ))}
         </motion.div>
@@ -135,17 +145,19 @@ const Projects = () => {
             </p>
           </motion.div>
         ) : (
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {filteredProjects.map((project) => (
-              <ProjectCard key={project._id} project={project} />
-            ))}
-          </motion.div>
+          <div className={styles.projectsContainer}>
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-4"
+            >
+              {filteredProjects.map((project) => (
+                <ProjectCard key={project._id} project={project} />
+              ))}
+            </motion.div>
+          </div>
         )}
       </div>
     </section>
@@ -159,37 +171,56 @@ const ProjectCard = ({ project }) => {
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0 },
       }}
-      className="glass rounded-xl overflow-hidden border border-white/5 hover:border-primary/20 transition-all duration-300 hover:shadow-[0_10px_25px_-15px_rgba(58,134,255,0.3)] hover:-translate-y-2"
+      whileHover={{
+        scale: 1.02,
+        boxShadow: "0 15px 30px -10px rgba(58,134,255,0.3)",
+      }}
+      className="glass rounded-xl overflow-hidden border border-white/5 hover:border-primary/20 transition-all duration-300 relative group h-full flex flex-col"
     >
+      {/* Futuristic corner accents */}
+      <div className="absolute top-0 left-0 w-5 h-5 border-t border-l border-primary/30 rounded-tl-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <div className="absolute top-0 right-0 w-5 h-5 border-t border-r border-primary/30 rounded-tr-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <div className="absolute bottom-0 left-0 w-5 h-5 border-b border-l border-primary/30 rounded-bl-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <div className="absolute bottom-0 right-0 w-5 h-5 border-b border-r border-primary/30 rounded-br-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+      {/* Glow effect */}
+      <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+
       <div className="relative h-48 overflow-hidden">
         <Image
           src={project.imageUrl}
           alt={project.title}
           fill
-          className="object-cover transition-transform duration-500 hover:scale-110"
+          className="object-cover transition-transform duration-500 group-hover:scale-110"
         />
         <div className="absolute top-2 right-2">
           <span className="px-3 py-1 text-xs rounded-full glass backdrop-blur-md border border-white/10">
             {project.category}
           </span>
         </div>
+
+        {/* Overlay gradient on hover */}
+        <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </div>
-      <div className="p-6">
-        <h3 className="text-xl font-semibold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">{project.title}</h3>
-        <p className="text-foreground/70 text-sm mb-4 line-clamp-3 leading-relaxed">
+
+      <div className="p-6 flex flex-col flex-grow">
+        <h3 className="text-xl font-semibold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary group-hover:from-secondary group-hover:to-primary transition-all duration-300">
+          {project.title}
+        </h3>
+        <p className="text-foreground/85 text-xs mb-4 line-clamp-3 leading-relaxed flex-grow">
           {project.description}
         </p>
         <div className="flex flex-wrap gap-2 mb-4">
           {project.technologies.map((tech, index) => (
             <span
               key={index}
-              className="px-2 py-1 text-xs rounded-full glass border border-white/10 backdrop-blur-sm"
+              className="px-2 py-1 text-xs rounded-full glass border border-white/10 backdrop-blur-sm group-hover:border-primary/20 transition-colors duration-300"
             >
               {tech}
             </span>
           ))}
         </div>
-        <div className="flex gap-4 pt-2 border-t border-white/10">
+        <div className="flex gap-4 pt-2 border-t border-white/10 mt-auto">
           {project.liveUrl && (
             <Link
               href={project.liveUrl}
@@ -200,7 +231,7 @@ const ProjectCard = ({ project }) => {
               <span>Live Demo</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4 ml-1"
+                className="h-4 w-4 ml-1 transition-transform duration-300 group-hover:translate-x-1"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -224,7 +255,7 @@ const ProjectCard = ({ project }) => {
               <span>GitHub</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4 ml-1"
+                className="h-4 w-4 ml-1 transition-transform duration-300 group-hover:translate-x-1"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

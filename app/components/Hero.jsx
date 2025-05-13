@@ -108,7 +108,7 @@ const Hero = () => {
             </motion.h2>
             <motion.p
               variants={itemVariants}
-              className="text-lg mb-8 max-w-xl text-foreground/80"
+              className="text-sm md:text-lg mb-8 max-w-xl text-foreground/80 opacity-75"
             >
               Proficient in building and designing specialized digital
               experiences for any platform. I transform ideas into engaging,

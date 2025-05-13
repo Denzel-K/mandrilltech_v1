@@ -1,0 +1,321 @@
+.processSection {
+  padding: 5rem 0;
+  position: relative;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+.timelineContainer {
+  position: relative;
+}
+
+.timelineLine {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, #3a86ff, #ff006e, #ffbe0b);
+  transform: translateX(-50%);
+}
+
+.timelineItems {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.timelineItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  position: relative;
+}
+
+.timelineItemLeft {
+  flex-direction: row;
+}
+
+.timelineItemRight {
+  flex-direction: row-reverse;
+}
+
+.timelineContent {
+  width: 100%;
+  max-width: calc(50% - 2rem);
+  position: relative;
+}
+
+.timelineContentLeft {
+  text-align: right;
+}
+
+.timelineContentRight {
+  text-align: left;
+}
+
+.timelineCard {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.timelineCard:hover {
+  border-color: rgba(58, 134, 255, 0.2);
+  box-shadow: 0 10px 25px -15px rgba(58, 134, 255, 0.3);
+  transform: translateY(-5px);
+}
+
+.timelineCardHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.timelineCardHeaderLeft {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}
+
+.timelineCardHeaderRight {
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.timelineCardIcon {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3a86ff;
+}
+
+.timelineCardIconLeft {
+  margin-left: 0.75rem;
+}
+
+.timelineCardIconRight {
+  margin-right: 0.75rem;
+}
+
+.timelineCardTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #3a86ff, #ff006e);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.timelineCardDescription {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.timelinePoint {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.timelinePointPulse {
+  position: absolute;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: linear-gradient(to right, #3a86ff, #ff006e);
+  opacity: 0.7;
+  animation: pulse 2s infinite;
+}
+
+.timelinePointCircle {
+  position: relative;
+  z-index: 10;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+.timelinePointNumber {
+  background: linear-gradient(to right, #3a86ff, #ff006e);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.timelineSpacer {
+  width: 100%;
+  max-width: calc(50% - 2rem);
+  position: relative;
+}
+
+/* Connector lines */
+.connector {
+  position: absolute;
+  background: linear-gradient(to right, rgba(58, 134, 255, 0.3), rgba(255, 0, 110, 0.3));
+  height: 2px;
+  top: 1.75rem;
+  z-index: 5;
+}
+
+.connectorLeft {
+  right: 2rem;
+  left: calc(100% - 2rem);
+  width: 4rem;
+}
+
+.connectorRight {
+  left: 2rem;
+  right: calc(100% - 2rem);
+  width: 4rem;
+}
+
+/* Floating elements */
+.floatingElement {
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: rgba(58, 134, 255, 0.1);
+  border: 1px solid rgba(58, 134, 255, 0.2);
+  z-index: 1;
+  opacity: 0;
+  animation: float 8s infinite ease-in-out;
+}
+
+.floatingElementLeft1 {
+  top: 20%;
+  right: 30%;
+  animation-delay: 0s;
+}
+
+.floatingElementLeft2 {
+  bottom: 30%;
+  right: 50%;
+  animation-delay: 2s;
+}
+
+.floatingElementRight1 {
+  top: 30%;
+  left: 40%;
+  animation-delay: 1s;
+}
+
+.floatingElementRight2 {
+  bottom: 20%;
+  left: 30%;
+  animation-delay: 3s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(-15px) scale(1.1);
+    opacity: 0.5;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .timelineLine {
+    left: 1.75rem;
+  }
+
+  .timelineItem {
+    flex-direction: row;
+  }
+
+  .timelineContent {
+    max-width: calc(100% - 5.5rem);
+    margin-left: auto;
+  }
+
+  .timelineContentLeft, .timelineContentRight {
+    text-align: left;
+  }
+
+  .timelineCardHeader {
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+  }
+
+  .timelineCardIconLeft, .timelineCardIconRight {
+    margin-left: 0;
+    margin-right: 0.75rem;
+  }
+
+  .timelineSpacer {
+    display: none;
+  }
+
+  .connector {
+    display: none;
+  }
+
+  .floatingElement {
+    display: none;
+  }
+}

@@ -1,15 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FaEnvelope, FaPhone, FaClock, FaCheckCircle } from "react-icons/fa";
+import { FaEnvelope, FaPhone, FaClock, FaCheckCircle, FaMapMarkerAlt } from "react-icons/fa";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
+  phone: z.string().optional(),
+  location: z.string().optional(),
+  subject: z.string().min(5, "Subject must be at least 5 characters"),
   message: z.string().min(10, "Message must be at least 10 characters"),
 });
 
@@ -17,22 +20,74 @@ const ContactFormCompact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [userLocation, setUserLocation] = useState("");
+
+  // Get user's location
+  useEffect(() => {
+    const fetchLocation = async () => {
+      try {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(async (position) => {
+            const { latitude, longitude } = position.coords;
+            try {
+              const response = await fetch(
+                `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=10`
+              );
+              const data = await response.json();
+
+              // Extract city and country
+              const city = data.address.city ||
+                          data.address.town ||
+                          data.address.village ||
+                          data.address.county ||
+                          "Unknown";
+              const country = data.address.country || "Unknown";
+
+              setUserLocation(`${city}, ${country}`);
+            } catch (error) {
+              console.error("Error fetching location data:", error);
+              setUserLocation("");
+            }
+          }, (error) => {
+            console.error("Geolocation error:", error);
+            setUserLocation("");
+          });
+        }
+      } catch (error) {
+        console.error("Location detection error:", error);
+      }
+    };
+
+    fetchLocation();
+  }, []);
 
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(contactSchema),
   });
 
+  // Set location value when it's available
+  useEffect(() => {
+    if (userLocation) {
+      setValue("location", userLocation);
+    }
+  }, [userLocation, setValue]);
+
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     setSubmitError("");
 
+    // Make sure subject is set (use message as fallback)
+    if (!data.subject) {
+      data.subject = data.message.substring(0, 50) + (data.message.length > 50 ? '...' : '');
+    }
+
     try {
-      // Simulate successful submission if MongoDB is not available
       const response = await fetch("/api/messages", {
         method: "POST",
         headers: {
@@ -42,18 +97,12 @@ const ContactFormCompact = () => {
       });
 
       if (!response.ok) {
-        if (response.status === 500) {
-          // For demo purposes, we'll pretend the message was sent successfully
-          console.log("Database error, but simulating successful submission for demo");
-          setSubmitSuccess(true);
-          reset();
-          return;
-        }
-
         const errorData = await response.json();
         throw new Error(errorData.message || "Something went wrong");
       }
 
+      const result = await response.json();
+      console.log("Message sent successfully:", result);
       setSubmitSuccess(true);
       reset();
     } catch (error) {
@@ -192,6 +241,63 @@ const ContactFormCompact = () => {
                         </p>
                       )}
                     </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <input
+                        type="tel"
+                        id="phone"
+                        {...register("phone")}
+                        className={`w-full px-4 py-2 rounded-lg glass focus:outline-none focus:ring-1 focus:ring-primary ${
+                          errors.phone ? "ring-1 ring-red-500" : ""
+                        }`}
+                        placeholder="+254 XXX XXX XXX"
+                      />
+                      {errors.phone && (
+                        <p className="mt-1 text-xs text-red-500">
+                          {errors.phone.message}
+                        </p>
+                      )}
+                    </div>
+
+                    <div>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          id="location"
+                          {...register("location")}
+                          className={`w-full px-4 py-2 pl-8 rounded-lg glass focus:outline-none focus:ring-1 focus:ring-primary ${
+                            errors.location ? "ring-1 ring-red-500" : ""
+                          }`}
+                          placeholder={userLocation || "Your location"}
+                          defaultValue={userLocation}
+                        />
+                        <FaMapMarkerAlt className="absolute left-3 top-3 text-primary text-xs" />
+                      </div>
+                      {errors.location && (
+                        <p className="mt-1 text-xs text-red-500">
+                          {errors.location.message}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div>
+                    <input
+                      type="text"
+                      id="subject"
+                      {...register("subject")}
+                      className={`w-full px-4 py-2 rounded-lg glass focus:outline-none focus:ring-1 focus:ring-primary ${
+                        errors.subject ? "ring-1 ring-red-500" : ""
+                      }`}
+                      placeholder="Subject of your message"
+                    />
+                    {errors.subject && (
+                      <p className="mt-1 text-xs text-red-500">
+                        {errors.subject.message}
+                      </p>
+                    )}
                   </div>
 
                   <div>

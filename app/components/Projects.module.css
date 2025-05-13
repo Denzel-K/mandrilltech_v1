@@ -1,0 +1,31 @@
+.projectsContainer {
+  max-height: 90vh;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+/* Custom scrollbar styles */
+.projectsContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.projectsContainer::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.projectsContainer::-webkit-scrollbar-thumb {
+  background: rgba(58, 134, 255, 0.3);
+  border-radius: 10px;
+  transition: all 0.3s;
+}
+
+.projectsContainer::-webkit-scrollbar-thumb:hover {
+  background: rgba(58, 134, 255, 0.5);
+}
+
+/* Firefox scrollbar */
+.projectsContainer {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(58, 134, 255, 0.3) rgba(255, 255, 255, 0.05);
+}

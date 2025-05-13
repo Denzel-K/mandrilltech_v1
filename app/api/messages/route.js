@@ -1,20 +1,10 @@
 import { NextResponse } from "next/server";
 import connectToDatabase from "@/app/lib/db";
 import Message from "@/app/lib/models/Message";
-import { getServerSession } from "next-auth";
-import { auth } from "@/auth";
 
-// GET all messages (protected)
+// GET all messages
 export async function GET() {
   try {
-    const session = await auth();
-
-    if (!session) {
-      return NextResponse.json(
-        { message: "Unauthorized" },
-        { status: 401 }
-      );
-    }
 
     await connectToDatabase();
     const messages = await Message.find({}).sort({ createdAt: -1 });
@@ -30,22 +20,41 @@ export async function GET() {
 export async function POST(request) {
   try {
     const data = await request.json();
+
+    // Validate required fields
+    if (!data.name || !data.email || !data.subject || !data.message) {
+      return NextResponse.json(
+        { message: "Missing required fields" },
+        { status: 400 }
+      );
+    }
+
+    // Connect to database
     await connectToDatabase();
 
+    // Create new message
     const message = new Message({
       name: data.name,
       email: data.email,
+      phone: data.phone || "",
+      location: data.location || "",
       subject: data.subject,
       message: data.message,
     });
 
-    await message.save();
+    // Save to database
+    const savedMessage = await message.save();
+    console.log("Message saved to database:", savedMessage._id);
 
     return NextResponse.json(
-      { message: "Message sent successfully" },
+      {
+        message: "Message sent successfully",
+        id: savedMessage._id
+      },
       { status: 201 }
     );
   } catch (error) {
+    console.error("Error saving message to database:", error);
     return NextResponse.json(
       { message: "Error sending message", error: error.message },
       { status: 500 }
@@ -53,17 +62,9 @@ export async function POST(request) {
   }
 }
 
-// PUT (update) a message (protected)
+// PUT (update) a message
 export async function PUT(request) {
   try {
-    const session = await auth();
-
-    if (!session) {
-      return NextResponse.json(
-        { message: "Unauthorized" },
-        { status: 401 }
-      );
-    }
 
     const data = await request.json();
     await connectToDatabase();

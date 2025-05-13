@@ -1,28 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { signOut } from "next-auth/react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { redirect } from "next/navigation";
-import { auth } from "@/auth";
-import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { FaHome, FaFolder, FaEnvelope, FaArrowLeft, FaSignOutAlt, FaSave, FaTimes } from "react-icons/fa";
 import { GiMonkey } from "react-icons/gi";
 
-export default async function NewProjectPage() {
-  const session = await auth();
-
-  // Server-side redirect if not authenticated
-  if (!session) {
-    redirect("/admin/login");
-  }
-
-  return <NewProjectPageClient session={session} />;
-}
-
-// Client component
-function NewProjectPageClient({ session }) {
+export default function NewProjectPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -40,6 +25,9 @@ function NewProjectPageClient({ session }) {
   });
 
   const [techInput, setTechInput] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [previewUrl, setPreviewUrl] = useState("");
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -69,18 +57,79 @@ function NewProjectPageClient({ session }) {
     });
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+
+      // Create a preview URL
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        setPreviewUrl(fileReader.result);
+      };
+      fileReader.readAsDataURL(file);
+    }
+  };
+
+  const uploadImage = async () => {
+    if (!selectedFile) return null;
+
+    try {
+      setUploadProgress(10);
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+
+      setUploadProgress(30);
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      setUploadProgress(70);
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || "Failed to upload image");
+      }
+
+      const data = await response.json();
+      setUploadProgress(100);
+      return data.filePath;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      setError("Error uploading image: " + error.message);
+      return null;
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
 
     try {
+      // First upload the image if one is selected
+      let imageUrl = formData.imageUrl;
+
+      if (selectedFile) {
+        const uploadedPath = await uploadImage();
+        if (uploadedPath) {
+          imageUrl = uploadedPath;
+        } else {
+          throw new Error("Failed to upload image");
+        }
+      }
+
+      // Then create the project with the image URL
       const response = await fetch("/api/projects", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          imageUrl,
+        }),
       });
 
       if (response.ok) {
@@ -94,9 +143,10 @@ function NewProjectPageClient({ session }) {
       }
     } catch (error) {
       console.error("Error creating project:", error);
-      setError("An unexpected error occurred");
+      setError("An unexpected error occurred: " + error.message);
     } finally {
       setLoading(false);
+      setUploadProgress(0);
     }
   };
 
@@ -104,12 +154,53 @@ function NewProjectPageClient({ session }) {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="flex">
+      <div className="flex flex-col lg:flex-row">
+        {/* Mobile Header */}
+        <div className="lg:hidden sticky top-0 z-30 w-full glass p-4 flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <div className="w-8 h-8 flex items-center justify-center">
+              <Image
+                src="/icons/mandrill-vector.svg"
+                alt="Mandrill Technologies Logo"
+                width={32}
+                height={32}
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <span className="text-lg font-bold text-gradient-full">
+              Admin Panel
+            </span>
+          </div>
+          <button
+            onClick={() => {
+              const sidebar = document.getElementById('admin-sidebar');
+              sidebar.classList.toggle('translate-x-0');
+              const isOpen = sidebar.classList.contains('translate-x-0');
+              document.getElementById('menu-icon').classList.toggle('hidden', isOpen);
+              document.getElementById('close-icon').classList.toggle('hidden', !isOpen);
+            }}
+            className="p-2 rounded-lg hover:bg-primary/10"
+          >
+            <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
         {/* Sidebar */}
-        <div className="w-64 h-screen glass fixed left-0 top-0 p-6">
+        <div id="admin-sidebar" className="w-64 h-screen glass fixed left-0 top-0 p-6 z-40 -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
           <div className="flex items-center space-x-2 mb-10">
-            <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-r from-primary to-secondary rounded-full">
-              <GiMonkey className="w-6 h-6 text-white" />
+            <div className="w-10 h-10 flex items-center justify-center">
+              <Image
+                src="/icons/mandrill-vector.svg"
+                alt="Mandrill Technologies Logo"
+                width={40}
+                height={40}
+                className="w-full h-full object-contain"
+              />
             </div>
             <span className="text-xl font-bold text-gradient-full">
               Admin Panel
@@ -120,6 +211,7 @@ function NewProjectPageClient({ session }) {
             <Link
               href="/admin"
               className="flex items-center space-x-2 p-3 rounded-lg hover:bg-primary/10 transition-colors"
+              onClick={() => document.getElementById('admin-sidebar').classList.remove('translate-x-0')}
             >
               <FaHome className="h-5 w-5" />
               <span>Dashboard</span>
@@ -127,6 +219,7 @@ function NewProjectPageClient({ session }) {
             <Link
               href="/admin/projects"
               className="flex items-center space-x-2 p-3 rounded-lg bg-primary/10 text-primary"
+              onClick={() => document.getElementById('admin-sidebar').classList.remove('translate-x-0')}
             >
               <FaFolder className="h-5 w-5" />
               <span>Projects</span>
@@ -134,6 +227,7 @@ function NewProjectPageClient({ session }) {
             <Link
               href="/admin/messages"
               className="flex items-center space-x-2 p-3 rounded-lg hover:bg-primary/10 transition-colors"
+              onClick={() => document.getElementById('admin-sidebar').classList.remove('translate-x-0')}
             >
               <FaEnvelope className="h-5 w-5" />
               <span>Messages</span>
@@ -148,18 +242,18 @@ function NewProjectPageClient({ session }) {
               <FaArrowLeft className="h-5 w-5" />
               <span>Back to Site</span>
             </Link>
-            <button
-              onClick={() => signOut({ redirect: true, callbackUrl: "/" })}
+            <Link
+              href="/"
               className="w-full mt-2 flex items-center space-x-2 p-3 rounded-lg hover:bg-red-500/10 text-red-500 transition-colors"
             >
               <FaSignOutAlt className="h-5 w-5" />
-              <span>Sign Out</span>
-            </button>
+              <span>Exit Admin</span>
+            </Link>
           </div>
         </div>
 
         {/* Main Content */}
-        <div className="ml-64 p-8 w-full">
+        <div className="w-full lg:ml-64 p-4 lg:p-8">
           <div className="flex justify-between items-center mb-8">
             <div>
               <h1 className="text-3xl font-bold mb-2">Add New Project</h1>
@@ -299,19 +393,64 @@ function NewProjectPageClient({ session }) {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
-                  <label htmlFor="imageUrl" className="block text-sm font-medium mb-2">
-                    Image URL *
+                  <label htmlFor="projectImage" className="block text-sm font-medium mb-2">
+                    Project Image *
                   </label>
-                  <input
-                    type="url"
-                    id="imageUrl"
-                    name="imageUrl"
-                    value={formData.imageUrl}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-lg glass focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="https://example.com/image.jpg"
-                  />
+                  <div className="mb-2">
+                    <div className="flex items-center space-x-4">
+                      <div className="flex-1">
+                        <input
+                          type="file"
+                          id="projectImage"
+                          accept="image/*"
+                          onChange={handleFileChange}
+                          className="hidden"
+                        />
+                        <label
+                          htmlFor="projectImage"
+                          className="w-full px-4 py-3 rounded-lg glass border border-dashed border-primary/50 flex items-center justify-center cursor-pointer hover:bg-primary/5 transition-colors"
+                        >
+                          {selectedFile ? (
+                            <span className="text-sm">{selectedFile.name}</span>
+                          ) : (
+                            <span className="text-sm text-foreground/70">Click to upload image</span>
+                          )}
+                        </label>
+                      </div>
+                      {uploadProgress > 0 && uploadProgress < 100 && (
+                        <div className="w-20 h-1 bg-background rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-primary"
+                            style={{ width: `${uploadProgress}%` }}
+                          ></div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {previewUrl && (
+                    <div className="mt-2 relative w-full h-40 rounded-lg overflow-hidden">
+                      <Image
+                        src={previewUrl}
+                        alt="Preview"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
+
+                  <div className="mt-2">
+                    <p className="text-xs text-foreground/50">Or provide an image URL:</p>
+                    <input
+                      type="url"
+                      id="imageUrl"
+                      name="imageUrl"
+                      value={formData.imageUrl}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-lg glass focus:outline-none focus:ring-2 focus:ring-primary mt-1"
+                      placeholder="https://example.com/image.jpg"
+                    />
+                  </div>
                 </div>
 
                 <div>

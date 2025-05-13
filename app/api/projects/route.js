@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import connectToDatabase from "@/app/lib/db";
 import Project from "@/app/lib/models/Project";
-import { getServerSession } from "next-auth";
-import { auth } from "@/auth";
 
 // GET all projects
 export async function GET() {
@@ -17,17 +15,9 @@ export async function GET() {
   }
 }
 
-// POST a new project (protected)
+// POST a new project
 export async function POST(request) {
   try {
-    const session = await auth();
-
-    if (!session) {
-      return NextResponse.json(
-        { message: "Unauthorized" },
-        { status: 401 }
-      );
-    }
 
     const data = await request.json();
     await connectToDatabase();
@@ -57,17 +47,9 @@ export async function POST(request) {
   }
 }
 
-// PUT (update) a project (protected)
+// PUT (update) a project
 export async function PUT(request) {
   try {
-    const session = await auth();
-
-    if (!session) {
-      return NextResponse.json(
-        { message: "Unauthorized" },
-        { status: 401 }
-      );
-    }
 
     const data = await request.json();
     await connectToDatabase();
@@ -106,17 +88,9 @@ export async function PUT(request) {
   }
 }
 
-// DELETE a project (protected)
+// DELETE a project
 export async function DELETE(request) {
   try {
-    const session = await auth();
-
-    if (!session) {
-      return NextResponse.json(
-        { message: "Unauthorized" },
-        { status: 401 }
-      );
-    }
 
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");

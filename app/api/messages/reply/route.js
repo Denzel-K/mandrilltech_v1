@@ -1,20 +1,11 @@
 import { NextResponse } from "next/server";
 import connectToDatabase from "@/app/lib/db";
 import Message from "@/app/lib/models/Message";
-import { auth } from "@/auth";
 import nodemailer from "nodemailer";
 
 // POST to reply to a message
 export async function POST(request) {
   try {
-    const session = await auth();
-
-    if (!session) {
-      return NextResponse.json(
-        { message: "Unauthorized" },
-        { status: 401 }
-      );
-    }
 
     const data = await request.json();
     const { messageId, replyContent } = data;
@@ -48,10 +39,10 @@ export async function POST(request) {
     const emailSent = await sendEmailReply(message.email, message.name, replyContent);
 
     return NextResponse.json(
-      { 
-        message: "Reply sent successfully", 
+      {
+        message: "Reply sent successfully",
         emailSent,
-        data: message 
+        data: message
       },
       { status: 200 }
     );
@@ -93,21 +84,21 @@ async function sendEmailReply(recipientEmail, recipientName, replyContent) {
             <h2 style="color: #3a86ff; margin: 0;">Mandrill Technologies</h2>
             <p style="color: #666; font-size: 14px;">Response to your inquiry</p>
           </div>
-          
+
           <div style="margin-bottom: 20px;">
             <p>Hello ${recipientName},</p>
             <p>Thank you for reaching out to Mandrill Technologies. Here's our response to your inquiry:</p>
           </div>
-          
+
           <div style="background-color: #f9f9f9; padding: 15px; border-left: 4px solid #3a86ff; margin-bottom: 20px;">
             <p style="margin: 0; white-space: pre-line;">${replyContent}</p>
           </div>
-          
+
           <div style="margin-top: 30px; font-size: 14px; color: #666;">
             <p>If you have any further questions, feel free to reply to this email or contact us through our website.</p>
             <p>Best regards,<br>Denzel Kariuki<br>Mandrill Technologies</p>
           </div>
-          
+
           <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0e0e0; text-align: center; font-size: 12px; color: #999;">
             <p>This is an automated response to your message sent through our website.</p>
             <p>&copy; ${new Date().getFullYear()} Mandrill Technologies. All rights reserved.</p>

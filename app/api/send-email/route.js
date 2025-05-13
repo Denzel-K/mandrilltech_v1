@@ -2,19 +2,9 @@ import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import connectToDatabase from "@/app/lib/db";
 import Message from "@/app/lib/models/Message";
-import { getServerSession } from "next-auth";
-import { auth } from "@/auth";
 
 export async function POST(request) {
   try {
-    const session = await auth();
-
-    if (!session) {
-      return NextResponse.json(
-        { message: "Unauthorized" },
-        { status: 401 }
-      );
-    }
 
     const data = await request.json();
     const { messageId, replyContent } = data;
