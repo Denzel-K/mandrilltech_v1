@@ -96,8 +96,8 @@ const Projects = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Projects</h2>
-          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary-dark">Projects</h2>
+          <p className="text-sm md:text-lg text-foreground/70 max-w-2xl mx-auto">
             Explore my latest work and see how I bring ideas to life through
             code and design.
           </p>

@@ -130,7 +130,7 @@
 }
 
 .category-icon {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   color: var(--primary);
   opacity: 0.8;
   display: flex;
@@ -178,10 +178,6 @@
   margin-left: 0.2rem;
 }
 
-/* Skills container */
-.skills-container {
-  margin-top: 1rem;
-}
 
 /* Content wrapper for smooth transitions */
 .expertise-content {
@@ -217,10 +213,6 @@
 
   .tab-icon {
     font-size: 1.25rem;
-  }
-
-  .category-icon {
-    font-size: 2rem;
   }
 
   .compact-skill-pill {

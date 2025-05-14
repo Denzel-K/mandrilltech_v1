@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Mandrill Technologies | Denzel Kariuki Ndegwa",
   description: "Fullstack developer specializing in web, mobile, and desktop development. Transforming ideas into digital experiences.",
-  keywords: ["fullstack developer", "web development", "mobile development", "desktop development", "UI/UX design", "database management", "SEO"],
+  keywords: ["fullstack developer", "web development", "mobile development", "desktop development", "UI/UX design", "database management", "SEO", "AI & Machine Learning", "C/C++"],
   authors: [{ name: "Denzel Kariuki Ndegwa" }],
   creator: "Denzel Kariuki Ndegwa",
   openGraph: {

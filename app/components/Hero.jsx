@@ -69,11 +69,11 @@ const Hero = () => {
 
       {/* Mandrill Face Image - positioned to cover right side */}
       <div className="absolute top-0 right-0 bottom-0 w-full lg:w-1/2 -z-5 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-l from-transparent to-background z-10"></div>
+        <div className="hero-desktop-overlay"></div>
         {/* Mobile blur overlay - only visible on tablet and mobile */}
         <div className="lg:hidden hero-mobile-overlay"></div>
         <Image
-          src="/mandrill-face-left.jpg"
+          src="/mandrill-face-left.png"
           alt="Mandrill Face"
           fill
           priority
@@ -110,7 +110,7 @@ const Hero = () => {
               variants={itemVariants}
               className="text-2xl md:text-4xl font-semibold mb-6 text-gray-300"
             >
-              I&apos;m a full-stack developer.
+              I&apos;m a Software Developer
             </motion.h2>
             <motion.p
               variants={itemVariants}

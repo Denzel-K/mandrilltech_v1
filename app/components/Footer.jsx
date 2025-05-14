@@ -53,12 +53,12 @@ const Footer = () => {
             transition={{ duration: 0.5 }}
           >
             <Link href="/" className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 flex items-center justify-center">
+              <div className="w-8 h-8 flex items-center justify-center">
                 <Image
                   src="/icons/mandrill-vector.svg"
                   alt="Mandrill Technologies Logo"
-                  width={30}
-                  height={30}
+                  width={32}
+                  height={32}
                   className="w-full h-full object-contain"
                 />
               </div>
@@ -66,7 +66,7 @@ const Footer = () => {
                 Mandrill Tech
               </span>
             </Link>
-            <p className="text-foreground/70 mb-4">
+            <p className="text-sm md:text-base opacity-60 text-foreground/70 mb-4">
               Empowering Your Future with Digital Innovation
             </p>
             <div className="flex gap-4">
@@ -90,12 +90,12 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-lg font-semibold mb-4 text-gray-300">Quick Links</h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/"
-                  className="text-sm md:text-base text-foreground/70 hover:text-primary transition-colors"
+                  className="text-sm md:text-base text-gray-400 hover:text-secondary transition-colors"
                 >
                   Home
                 </Link>
@@ -103,7 +103,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/#expertise"
-                  className="text-sm md:text-base text-foreground/70 hover:text-primary transition-colors"
+                  className="text-sm md:text-base text-gray-400 hover:text-secondary transition-colors"
                 >
                   Expertise
                 </Link>
@@ -111,7 +111,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/#projects"
-                  className="text-sm md:text-base text-foreground/70 hover:text-primary transition-colors"
+                  className="text-sm md:text-base text-gray-400 hover:text-secondary transition-colors"
                 >
                   Projects
                 </Link>
@@ -119,7 +119,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/business"
-                  className="text-sm md:text-base text-foreground/70 hover:text-primary transition-colors"
+                  className="text-sm md:text-base text-gray-400 hover:text-secondary transition-colors"
                 >
                   Business
                 </Link>
@@ -127,7 +127,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/business#contact"
-                  className="text-foreground/70 hover:text-primary transition-colors"
+                  className="text-sm md:text-base text-gray-400 hover:text-secondary transition-colors"
                 >
                   Contact
                 </Link>
@@ -141,7 +141,7 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
+            <h3 className="text-lg font-semibold mb-4 text-gray-300">Contact Info</h3>
             <ul className="space-y-2">
               <li className="flex items-center text-foreground/70">
                 <svg
@@ -160,7 +160,7 @@ const Footer = () => {
                 </svg>
                 <a
                   href="mailto:denzelk741@gmail.com"
-                  className="hover:text-primary transition-colors"
+                  className="text-sm md:text-base text-gray-400 hover:text-primary transition-colors"
                 >
                   denzelk741@gmail.com
                 </a>
@@ -182,7 +182,7 @@ const Footer = () => {
                 </svg>
                 <a
                   href="tel:+254110725965"
-                  className="hover:text-primary transition-colors"
+                  className="text-sm md:text-base text-gray-400 hover:text-primary transition-colors"
                 >
                   +254 110 725 965
                 </a>

@@ -12,13 +12,24 @@
   font-weight: bold;
   filter: drop-shadow(0 0 5px rgba(58, 134, 255, 0.5));
 }
+/* Mobile blur overlay for hero section - Desktop*/
 
-/* Mobile blur overlay for hero section */
+.hero-desktop-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: hsl(0, 0%, 2%, 0.45);
+  /* backdrop-filter: blur(1px); */
+  z-index: 10;
+}
+
+
+/* Mobile blur overlay for hero section - Mobile and Tablet */
 @media (max-width: 1023px) {
   .hero-mobile-overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.85));
     /* backdrop-filter: blur(1px); */
     z-index: 5;
   }

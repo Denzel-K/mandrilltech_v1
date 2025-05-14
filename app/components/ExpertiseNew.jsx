@@ -22,6 +22,8 @@ import {
   FaServer,
   FaLaptopCode,
   FaCloud,
+  FaBrain,
+  FaRobot,
 } from "react-icons/fa";
 
 import {
@@ -64,6 +66,14 @@ import {
   SiInvision,
   SiAdobephotoshop,
   SiAdobeillustrator,
+  SiCplusplus,
+  SiC,
+  SiPython,
+  SiTensorflow,
+  SiPytorch,
+  SiScikitlearn,
+  SiOpencv,
+  SiKeras,
 } from "react-icons/si";
 
 const ExpertiseNew = () => {
@@ -123,6 +133,35 @@ const ExpertiseNew = () => {
         { name: "JavaScript", icon: <FaJs className="text-[#F7DF1E]" /> },
         { name: "TypeScript", icon: <SiTypescript className="text-[#3178C6]" /> },
         { name: "Node.js", icon: <FaNodeJs className="text-[#339933]" /> },
+      ]
+    },
+    {
+      id: "cpp",
+      name: "C/C++ Development",
+      icon: <FaCode />,
+      description: "Building high-performance, system-level applications and embedded systems with C and C++ programming languages.",
+      skills: [
+        { name: "C++", icon: <SiCplusplus className="text-[#00599C]" />, category: "Languages" },
+        { name: "C", icon: <SiC className="text-[#A8B9CC]" />, category: "Languages" },
+        { name: "Object-Oriented Programming", icon: <FaCode className="text-[#6495ED]" />, category: "Paradigms" },
+        { name: "Memory Management", icon: <FaServer className="text-[#FF6347]" />, category: "Systems" },
+        { name: "Multithreading", icon: <FaCode className="text-[#9370DB]" />, category: "Concurrency" },
+        { name: "STL", icon: <FaCode className="text-[#4682B4]" />, category: "Libraries" },
+      ]
+    },
+    {
+      id: "ai",
+      name: "AI & Machine Learning",
+      icon: <FaBrain />,
+      description: "Developing intelligent systems using machine learning, deep learning, and data science techniques to solve complex problems.",
+      skills: [
+        { name: "Python", icon: <SiPython className="text-[#3776AB]" />, category: "Languages" },
+        { name: "TensorFlow", icon: <SiTensorflow className="text-[#FF6F00]" />, category: "Frameworks" },
+        { name: "PyTorch", icon: <SiPytorch className="text-[#EE4C2C]" />, category: "Frameworks" },
+        { name: "Scikit-Learn", icon: <SiScikitlearn className="text-[#F7931E]" />, category: "Libraries" },
+        { name: "Computer Vision", icon: <SiOpencv className="text-[#5C3EE8]" />, category: "Domains" },
+        { name: "Deep Learning", icon: <SiKeras className="text-[#D00000]" />, category: "Techniques" },
+        { name: "NLP", icon: <FaRobot className="text-[#10B981]" />, category: "Domains" },
       ]
     },
     {
@@ -359,11 +398,11 @@ const ExpertiseNew = () => {
         </div>
 
         {/* Content Area */}
-        <div className="expertise-card p-6 relative min-h-[250px]">
+        <div className="expertise-card py-4 px-2 lg:py-6 lg:px-4 relative min-h-[250px]">
           {/* Force re-render with key to prevent empty slides */}
           {activeData && (
-            <div key={activeCategory} className="w-full">
-              <div className="mb-6">
+            <div key={activeCategory} className="w-full flex flex-col lg:grid lg:grid-cols-2 lg:gap-4">
+              <div className="mb-6 lg:border-[1.2px] lg:border-gray-800 rounded-md lg:h-full lg:py-[1.5rem] lg:px-[.7rem]">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="text-xl font-bold text-secondary">
                     {activeData.name}
@@ -378,7 +417,7 @@ const ExpertiseNew = () => {
                 </p>
               </div>
 
-              <div className="skills-container">
+              <div className="skills-container border-[1.2px] border-gray-800 rounded-md lg:h-full p-2 lg:py-[1.5rem] lg:px-[.7rem]">
                 <h4 className="text-base font-medium mb-3 text-accent">Key Technologies</h4>
 
                 <div className="flex flex-wrap gap-2">
