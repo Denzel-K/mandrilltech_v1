@@ -80,10 +80,12 @@ const Projects = () => {
 
   return (
     <section id="projects" className="py-20 relative">
-      {/* Background Elements */}
+      {/* Enhanced Background Elements */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-accent/10 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-72 h-72 bg-primary/10 rounded-full filter blur-3xl"></div>
+        <div className="absolute top-20 left-10 w-72 h-72 bg-accent/20 rounded-full filter blur-3xl animate-pulse-slow"></div>
+        <div className="absolute bottom-20 right-10 w-72 h-72 bg-primary/20 rounded-full filter blur-3xl animate-pulse-slow"></div>
+        <div className="absolute top-1/3 right-1/4 w-48 h-48 bg-secondary/10 rounded-full filter blur-2xl"></div>
+        <div className="absolute bottom-1/3 left-1/4 w-48 h-48 bg-primary/10 rounded-full filter blur-2xl"></div>
       </div>
 
       <div className="container mx-auto px-4 md:px-6">
@@ -145,19 +147,34 @@ const Projects = () => {
             </p>
           </motion.div>
         ) : (
-          <div className={styles.projectsContainer}>
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-4"
-            >
-              {filteredProjects.map((project) => (
-                <ProjectCard key={project._id} project={project} />
-              ))}
-            </motion.div>
-          </div>
+          <motion.div
+            className={styles.projectsContainer}
+            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.8,
+              ease: [0.19, 1, 0.22, 1]
+            }}
+          >
+            {/* Depth effect elements */}
+            <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-black/40 to-transparent pointer-events-none z-10"></div>
+            <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/40 to-transparent pointer-events-none z-10"></div>
+
+            <div className={styles.projectsInner}>
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-4"
+              >
+                {filteredProjects.map((project) => (
+                  <ProjectCard key={project._id} project={project} />
+                ))}
+              </motion.div>
+            </div>
+          </motion.div>
         )}
       </div>
     </section>
@@ -172,10 +189,15 @@ const ProjectCard = ({ project }) => {
         visible: { opacity: 1, y: 0 },
       }}
       whileHover={{
-        scale: 1.02,
-        boxShadow: "0 15px 30px -10px rgba(58,134,255,0.3)",
+        scale: 1.03,
+        boxShadow: "0 20px 40px -15px rgba(58,134,255,0.4)",
+        y: -5,
+        zIndex: 10
       }}
-      className="glass rounded-xl overflow-hidden border border-white/5 hover:border-primary/20 transition-all duration-300 relative group h-full flex flex-col"
+      className="glass rounded-xl overflow-hidden border border-white/5 hover:border-primary/20 transition-all duration-500 relative group h-full flex flex-col"
+      style={{
+        transformStyle: "preserve-3d",
+      }}
     >
       {/* Futuristic corner accents */}
       <div className="absolute top-0 left-0 w-5 h-5 border-t border-l border-primary/30 rounded-tl-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -183,8 +205,11 @@ const ProjectCard = ({ project }) => {
       <div className="absolute bottom-0 left-0 w-5 h-5 border-b border-l border-primary/30 rounded-bl-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       <div className="absolute bottom-0 right-0 w-5 h-5 border-b border-r border-primary/30 rounded-br-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-      {/* Glow effect */}
-      <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+      {/* Enhanced glow effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none"></div>
+
+      {/* Depth shadow */}
+      <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-transparent to-secondary/20 rounded-xl opacity-0 group-hover:opacity-100 blur-xl transition-all duration-500 -z-10 group-hover:translate-y-4"></div>
 
       <div className="relative h-48 overflow-hidden">
         <Image

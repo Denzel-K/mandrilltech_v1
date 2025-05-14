@@ -87,7 +87,7 @@ const Navbar = () => {
               href="/"
               className="text-foreground hover:text-primary transition-colors"
             >
-              Portfolio
+              Home
             </Link>
             <Link
               href="/#projects"
@@ -164,7 +164,7 @@ const Navbar = () => {
             className="px-4 py-2 hover:bg-primary/10 transition-colors"
             onClick={() => setIsOpen(false)}
           >
-            Portfolio
+            Home
           </Link>
           <Link
             href="/#projects"

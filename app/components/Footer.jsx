@@ -97,7 +97,7 @@ const Footer = () => {
                   href="/"
                   className="text-foreground/70 hover:text-primary transition-colors"
                 >
-                  Portfolio
+                  Home
                 </Link>
               </li>
               <li>
