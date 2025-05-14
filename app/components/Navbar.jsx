@@ -90,6 +90,12 @@ const Navbar = () => {
               Home
             </Link>
             <Link
+              href="/#expertise"
+              className="text-foreground hover:text-primary transition-colors"
+            >
+              Expertise
+            </Link>
+            <Link
               href="/#projects"
               className="text-foreground hover:text-primary transition-colors"
             >
@@ -103,7 +109,7 @@ const Navbar = () => {
             </Link>
             <Link
               href="/business#contact"
-              className="btn px-4 py-2 rounded-full bg-accent text-white hover:bg-accent/70 transition-colors"
+              className="btn px-4 py-2 rounded-full text-white transition-colors contactBtnGradient"
             >
               Contact
             </Link>
@@ -167,6 +173,13 @@ const Navbar = () => {
             Home
           </Link>
           <Link
+            href="/#expertise"
+            className="px-4 py-2 hover:bg-primary/10 transition-colors"
+            onClick={() => setIsOpen(false)}
+          >
+            Expertise
+          </Link>
+          <Link
             href="/#projects"
             className="px-4 py-2 hover:bg-primary/10 transition-colors"
             onClick={() => setIsOpen(false)}
@@ -182,7 +195,7 @@ const Navbar = () => {
           </Link>
           <Link
             href="/business#contact"
-            className="btn mx-4 mt-2 px-4 py-2 rounded-full bg-accent text-white text-center hover:bg-accent/70 transition-colors"
+            className="btn mx-4 mt-2 px-4 py-2 rounded-full text-white text-center transition-colors contactBtnGradient"
             onClick={() => setIsOpen(false)}
           >
             Contact

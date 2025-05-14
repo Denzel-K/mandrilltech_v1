@@ -108,13 +108,13 @@ const Hero = () => {
             </motion.h1>
             <motion.h2
               variants={itemVariants}
-              className="text-2xl md:text-4xl font-semibold mb-6"
+              className="text-2xl md:text-4xl font-semibold mb-6 text-gray-300"
             >
               I&apos;m a full-stack developer.
             </motion.h2>
             <motion.p
               variants={itemVariants}
-              className="text-sm md:text-lg mb-8 max-w-xl text-foreground/80 opacity-60 md:opacity-70"
+              className="text-sm md:text-lg mb-8 max-w-xl text-foreground/80 text-gray-400"
             >
               Proficient in building and designing specialized digital
               experiences for any platform. I transform ideas into engaging,
@@ -127,13 +127,13 @@ const Hero = () => {
             >
               <Link
                 href="/business"
-                className="btn px-6 py-3 rounded-full bg-primary text-white hover:opacity-90 transition-all"
+                className="btn px-4 py-2 md:px-6 md:py-3 rounded-full bg-primary text-white hover:opacity-90 transition-all"
               >
                 Hire Me
               </Link>
               <Link
                 href="#projects"
-                className="btn px-6 py-3 rounded-full glass border border-primary/30 hover:bg-primary/10 transition-all"
+                className="btn px-4 py-2 md:px-6 md:py-3 rounded-full glass border border-primary/30 hover:bg-primary/10 transition-all"
               >
                 View Projects
               </Link>

@@ -269,7 +269,7 @@ const ExpertiseNew = () => {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary">My Expertise</h2>
-          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+          <p className="text-sm md:text-lg text-foreground/70 max-w-2xl mx-auto">
             I specialize in a wide range of technologies and services to deliver exceptional digital experiences.
           </p>
         </motion.div>

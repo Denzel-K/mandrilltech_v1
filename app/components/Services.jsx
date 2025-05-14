@@ -81,10 +81,10 @@ const Services = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary-dark">
             Services I Offer
           </h2>
-          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+          <p className="text-sm md:text-lg text-foreground/70 max-w-2xl mx-auto">
             I provide comprehensive digital solutions to help your business
             thrive in the digital landscape.
           </p>
@@ -95,7 +95,7 @@ const Services = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8"
         >
           {services.map((service, index) => (
             <motion.div
@@ -104,10 +104,10 @@ const Services = () => {
               className="glass p-6 rounded-xl border border-white/5 hover:border-primary/20 transition-all duration-300 hover:shadow-[0_10px_25px_-15px_rgba(58,134,255,0.3)] hover:-translate-y-2"
             >
               <div className="flex items-center mb-5">
-                <div className="w-12 h-12 mr-4 flex items-center justify-center rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 backdrop-blur-sm border border-white/10">
+                <span className="mr-4 flex">
                   <service.icon className="w-5 h-5 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">{service.title}</h3>
+                </span>
+                <h3 className="text-lg md:text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">{service.title}</h3>
               </div>
               <p className="text-foreground/70 text-sm leading-relaxed">{service.description}</p>
             </motion.div>

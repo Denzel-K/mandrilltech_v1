@@ -114,14 +114,14 @@ const Projects = () => {
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
-              className={`px-4 py-2 rounded-full transition-all flex items-center ${
+              className={`px-4 py-[6px] rounded-md transition-all flex items-center ${
                 activeCategory === category.id
                   ? "bg-primary text-white"
                   : "glass border border-white/10 hover:border-primary/30 hover:bg-primary/5"
               }`}
             >
-              {category.icon}
-              {category.label}
+              <span className="">{category.icon}</span>
+              <span className="text-xs md-text-base">{category.label}</span>     
             </button>
           ))}
         </motion.div>
@@ -157,9 +157,6 @@ const Projects = () => {
               ease: [0.19, 1, 0.22, 1]
             }}
           >
-            {/* Depth effect elements */}
-            <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-black/40 to-transparent pointer-events-none z-10"></div>
-            <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/40 to-transparent pointer-events-none z-10"></div>
 
             <div className={styles.projectsInner}>
               <motion.div
@@ -167,7 +164,7 @@ const Projects = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-4"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 pb-4"
               >
                 {filteredProjects.map((project) => (
                   <ProjectCard key={project._id} project={project} />
@@ -194,7 +191,7 @@ const ProjectCard = ({ project }) => {
         y: -5,
         zIndex: 10
       }}
-      className="glass rounded-xl overflow-hidden border border-white/5 hover:border-primary/20 transition-all duration-500 relative group h-full flex flex-col"
+      className="glass rounded-xl overflow-hidden border border-white/5 hover:border-primary/20 transition-all duration-300 relative group h-full flex flex-col"
       style={{
         transformStyle: "preserve-3d",
       }}
@@ -205,9 +202,6 @@ const ProjectCard = ({ project }) => {
       <div className="absolute bottom-0 left-0 w-5 h-5 border-b border-l border-primary/30 rounded-bl-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       <div className="absolute bottom-0 right-0 w-5 h-5 border-b border-r border-primary/30 rounded-br-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-      {/* Enhanced glow effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none"></div>
-
       {/* Depth shadow */}
       <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-transparent to-secondary/20 rounded-xl opacity-0 group-hover:opacity-100 blur-xl transition-all duration-500 -z-10 group-hover:translate-y-4"></div>
 
@@ -216,7 +210,7 @@ const ProjectCard = ({ project }) => {
           src={project.imageUrl}
           alt={project.title}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-110"
+          className="object-cover transition-transform duration-500 group-hover:scale-110 opacity-70"
         />
         <div className="absolute top-2 right-2">
           <span className="px-3 py-1 text-xs rounded-full glass backdrop-blur-md border border-white/10">
@@ -224,18 +218,18 @@ const ProjectCard = ({ project }) => {
           </span>
         </div>
 
-        {/* Overlay gradient on hover */}
+        {/* Overlay gradient over thumbnail on hover */}
         <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </div>
 
       <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-xl font-semibold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary group-hover:from-secondary group-hover:to-primary transition-all duration-300">
+        <h3 className="text-lg md:text-xl opacity-85 font-semibold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary group-hover:from-secondary group-hover:to-primary transition-all duration-200">
           {project.title}
         </h3>
-        <p className="text-foreground/85 text-xs mb-4 line-clamp-3 leading-relaxed flex-grow">
+        <p className="text-foreground/85 text-xs mb-4 line-clamp-3 leading-relaxed flex-grow opacity-70">
           {project.description}
         </p>
-        <div className="flex flex-wrap gap-2 mb-4">
+        {/* <div className="flex flex-wrap gap-2 mb-4">
           {project.technologies.map((tech, index) => (
             <span
               key={index}
@@ -244,16 +238,16 @@ const ProjectCard = ({ project }) => {
               {tech}
             </span>
           ))}
-        </div>
+        </div> */}
         <div className="flex gap-4 pt-2 border-t border-white/10 mt-auto">
           {project.liveUrl && (
             <Link
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-primary hover:text-secondary transition-colors flex items-center"
+              className="text-xs md:text-sm text-secondary hover:text-primary transition-colors flex items-center"
             >
-              <span>Live Demo</span>
+              <span>Live Site</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-4 w-4 ml-1 transition-transform duration-300 group-hover:translate-x-1"
@@ -275,7 +269,7 @@ const ProjectCard = ({ project }) => {
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-foreground/70 hover:text-primary transition-colors flex items-center"
+              className="text-xs md:text-sm text-foreground/70 text-accent hover:text-primary transition-colors flex items-center"
             >
               <span>GitHub</span>
               <svg

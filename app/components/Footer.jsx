@@ -57,8 +57,8 @@ const Footer = () => {
                 <Image
                   src="/icons/mandrill-vector.svg"
                   alt="Mandrill Technologies Logo"
-                  width={40}
-                  height={40}
+                  width={30}
+                  height={30}
                   className="w-full h-full object-contain"
                 />
               </div>
@@ -95,15 +95,23 @@ const Footer = () => {
               <li>
                 <Link
                   href="/"
-                  className="text-foreground/70 hover:text-primary transition-colors"
+                  className="text-sm md:text-base text-foreground/70 hover:text-primary transition-colors"
                 >
                   Home
                 </Link>
               </li>
               <li>
                 <Link
+                  href="/#expertise"
+                  className="text-sm md:text-base text-foreground/70 hover:text-primary transition-colors"
+                >
+                  Expertise
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/#projects"
-                  className="text-foreground/70 hover:text-primary transition-colors"
+                  className="text-sm md:text-base text-foreground/70 hover:text-primary transition-colors"
                 >
                   Projects
                 </Link>
@@ -111,7 +119,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/business"
-                  className="text-foreground/70 hover:text-primary transition-colors"
+                  className="text-sm md:text-base text-foreground/70 hover:text-primary transition-colors"
                 >
                   Business
                 </Link>

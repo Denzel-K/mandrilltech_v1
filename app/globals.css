@@ -65,6 +65,13 @@
   }
 }
 
+.contactBtnGradient{
+  background: linear-gradient(to right, hsl(334, 100%, 50%, 0.25), hsl(19, 97%, 51%, 0.25));
+}
+.contactBtnGradient:hover{
+  background: linear-gradient(to right, hsl(334, 100%, 50%, 0.5), hsl(19, 97%, 51%, 0.5));
+}
+
 /* Glassmorphism */
 .glass {
   background: var(--glass-bg);

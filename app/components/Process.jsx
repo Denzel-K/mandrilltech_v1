@@ -76,10 +76,10 @@ const Process = () => {
           transition={{ duration: 0.5 }}
           className={styles.header}
         >
-          <h2 className={styles.title}>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary">
             My Work Process
           </h2>
-          <p className={styles.subtitle}>
+          <p className="text-sm md:text-lg text-foreground/70 max-w-2xl mx-auto">
             A structured approach to delivering high-quality digital solutions
             that meet your business needs.
           </p>
