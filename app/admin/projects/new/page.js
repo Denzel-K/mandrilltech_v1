@@ -21,6 +21,7 @@ export default function NewProjectPage() {
     imageUrl: "",
     liveUrl: "",
     githubUrl: "",
+    downloadUrl: "",
     featured: false,
   });
 
@@ -355,18 +356,51 @@ export default function NewProjectPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="liveUrl" className="block text-sm font-medium mb-2">
-                    Live URL
-                  </label>
-                  <input
-                    type="url"
-                    id="liveUrl"
-                    name="liveUrl"
-                    value={formData.liveUrl}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg glass focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="https://example.com"
-                  />
+                  <div className="mb-6">
+                    {/* Project Links Section - Conditional based on category */}
+                    <div className="mb-4">
+                      <h3 className="text-lg font-medium mb-2 text-gradient-full">Project Links</h3>
+                      <p className="text-xs text-foreground/70 mb-4">
+                        Add relevant links based on your project category. All fields are optional.
+                      </p>
+                    </div>
+
+                    {/* Live URL - Only for Web projects */}
+                    {(formData.category === "Web" || formData.category === "Other") && (
+                      <div className="mb-4 transition-all duration-300">
+                        <label htmlFor="liveUrl" className="block text-sm font-medium mb-2">
+                          Live URL
+                        </label>
+                        <input
+                          type="url"
+                          id="liveUrl"
+                          name="liveUrl"
+                          value={formData.liveUrl}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 rounded-lg glass focus:outline-none focus:ring-2 focus:ring-primary"
+                          placeholder="https://example.com"
+                        />
+                      </div>
+                    )}
+
+                    {/* Download URL - For Mobile and Desktop projects */}
+                    {(formData.category === "Mobile" || formData.category === "Desktop" || formData.category === "Other") && (
+                      <div className="mb-4 transition-all duration-300">
+                        <label htmlFor="downloadUrl" className="block text-sm font-medium mb-2">
+                          Download URL
+                        </label>
+                        <input
+                          type="url"
+                          id="downloadUrl"
+                          name="downloadUrl"
+                          value={formData.downloadUrl}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 rounded-lg glass focus:outline-none focus:ring-2 focus:ring-primary"
+                          placeholder="https://example.com/download"
+                        />
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
 

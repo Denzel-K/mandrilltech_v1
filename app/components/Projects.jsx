@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { FiMonitor, FiSmartphone, FiLayers, FiGrid } from "react-icons/fi";
-import { FaDesktop } from "react-icons/fa";
+import { FaDesktop, FaDownload, FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 import styles from "./Projects.module.css";
 
 const Projects = () => {
@@ -96,7 +96,7 @@ const Projects = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary-dark">Projects</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-secondary">Projects</h2>
           <p className="text-sm md:text-lg text-foreground/70 max-w-2xl mx-auto">
             Explore my latest work and see how I bring ideas to life through
             code and design.
@@ -121,7 +121,7 @@ const Projects = () => {
               }`}
             >
               <span className="">{category.icon}</span>
-              <span className="text-xs md-text-base">{category.label}</span>     
+              <span className="text-xs md-text-base">{category.label}</span>
             </button>
           ))}
         </motion.div>
@@ -240,30 +240,32 @@ const ProjectCard = ({ project }) => {
           ))}
         </div> */}
         <div className="flex gap-4 pt-2 border-t border-white/10 mt-auto">
-          {project.liveUrl && (
+          {/* Live URL - Only for Web projects */}
+          {project.liveUrl && (project.category === "Web" || project.category === "Other") && (
             <Link
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs md:text-sm text-secondary hover:text-primary transition-colors flex items-center"
             >
+              <FaExternalLinkAlt className="mr-1" />
               <span>Live Site</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4 ml-1 transition-transform duration-300 group-hover:translate-x-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                />
-              </svg>
             </Link>
           )}
+
+          {/* Download URL - For Mobile and Desktop projects */}
+          {project.downloadUrl && (project.category === "Mobile" || project.category === "Desktop" || project.category === "Other") && (
+            <Link
+              href={project.downloadUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs md:text-sm text-secondary hover:text-primary transition-colors flex items-center"
+            >
+              <FaDownload className="mr-1" />
+              <span>Download</span>
+            </Link>
+          )}
+
           {project.githubUrl && (
             <Link
               href={project.githubUrl}
@@ -271,21 +273,8 @@ const ProjectCard = ({ project }) => {
               rel="noopener noreferrer"
               className="text-xs md:text-sm text-foreground/70 text-accent hover:text-primary transition-colors flex items-center"
             >
+              <FaGithub className="mr-1" />
               <span>GitHub</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4 ml-1 transition-transform duration-300 group-hover:translate-x-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                />
-              </svg>
             </Link>
           )}
         </div>

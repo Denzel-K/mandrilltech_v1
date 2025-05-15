@@ -135,7 +135,7 @@ const ContactFormCompact = () => {
           </p>
         </motion.div>
 
-        <div className="glass p-6 md:p-8 rounded-xl max-w-3xl mx-auto">
+        <div className="glass p-4 md:p-8 rounded-xl max-w-3xl mx-auto">
           <div>
             {/* Contact Form */}
             <div>

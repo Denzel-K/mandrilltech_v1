@@ -126,6 +126,14 @@ const Footer = () => {
               </li>
               <li>
                 <Link
+                  href="/ai"
+                  className="text-sm md:text-base text-gray-400 hover:text-secondary transition-colors"
+                >
+                  Me + AI
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/business#contact"
                   className="text-sm md:text-base text-gray-400 hover:text-secondary transition-colors"
                 >

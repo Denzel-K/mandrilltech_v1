@@ -108,6 +108,12 @@ const Navbar = () => {
               Business
             </Link>
             <Link
+              href="/ai"
+              className="text-foreground hover:text-primary transition-colors"
+            >
+              Me + AI
+            </Link>
+            <Link
               href="/business#contact"
               className="btn px-4 py-2 rounded-full text-white transition-colors contactBtnGradient"
             >
@@ -192,6 +198,13 @@ const Navbar = () => {
             onClick={() => setIsOpen(false)}
           >
             Business
+          </Link>
+          <Link
+            href="/ai"
+            className="px-4 py-2 hover:bg-primary/10 transition-colors"
+            onClick={() => setIsOpen(false)}
+          >
+            Me + AI
           </Link>
           <Link
             href="/business#contact"

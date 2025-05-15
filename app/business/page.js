@@ -2,6 +2,7 @@ import Navbar from "@/app/components/Navbar";
 import BusinessHero from "@/app/components/BusinessHero";
 import Services from "@/app/components/Services";
 import Process from "@/app/components/Process";
+import AIBusiness from "@/app/components/AIBusiness";
 import ContactFormCompact from "@/app/components/ContactFormCompact";
 import Footer from "@/app/components/Footer";
 
@@ -18,6 +19,7 @@ export default function Business() {
         <BusinessHero />
         <Services />
         <Process />
+        <AIBusiness />
         <ContactFormCompact />
       </main>
       <Footer />
