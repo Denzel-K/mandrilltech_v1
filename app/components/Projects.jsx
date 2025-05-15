@@ -197,20 +197,20 @@ const ProjectCard = ({ project }) => {
       }}
     >
       {/* Futuristic corner accents */}
-      <div className="absolute top-0 left-0 w-5 h-5 border-t border-l border-primary/30 rounded-tl-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-      <div className="absolute top-0 right-0 w-5 h-5 border-t border-r border-primary/30 rounded-tr-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-      <div className="absolute bottom-0 left-0 w-5 h-5 border-b border-l border-primary/30 rounded-bl-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-      <div className="absolute bottom-0 right-0 w-5 h-5 border-b border-r border-primary/30 rounded-br-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <div className="absolute top-0 left-0 w-5 h-5 border-t border-l border-primary/30 rounded-tl-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+      <div className="absolute top-0 right-0 w-5 h-5 border-t border-r border-primary/30 rounded-tr-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+      <div className="absolute bottom-0 left-0 w-5 h-5 border-b border-l border-primary/30 rounded-bl-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+      <div className="absolute bottom-0 right-0 w-5 h-5 border-b border-r border-primary/30 rounded-br-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
 
       {/* Depth shadow */}
-      <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-transparent to-secondary/20 rounded-xl opacity-0 group-hover:opacity-100 blur-xl transition-all duration-500 -z-10 group-hover:translate-y-4"></div>
+      <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-transparent to-secondary/20 rounded-xl opacity-0 group-hover:opacity-100 blur-xl transition-all duration-200 -z-10 group-hover:translate-y-4"></div>
 
       <div className="relative h-48 overflow-hidden">
         <Image
           src={project.imageUrl}
           alt={project.title}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-110 opacity-70"
+          className="object-cover transition-transform duration-500 group-hover:scale-110 opacity-80"
         />
         <div className="absolute top-2 right-2">
           <span className="px-3 py-1 text-xs rounded-full glass backdrop-blur-md border border-white/10">
