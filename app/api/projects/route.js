@@ -30,6 +30,7 @@ export async function POST(request) {
       imageUrl: data.imageUrl,
       liveUrl: data.liveUrl,
       githubUrl: data.githubUrl,
+      downloadUrl: data.downloadUrl,
       featured: data.featured || false,
     });
 
@@ -50,8 +51,8 @@ export async function POST(request) {
 // PUT (update) a project
 export async function PUT(request) {
   try {
-
     const data = await request.json();
+    console.log("Received update data:", data);
     await connectToDatabase();
 
     const { id, ...updateData } = data;
@@ -61,6 +62,19 @@ export async function PUT(request) {
         { message: "Project ID is required" },
         { status: 400 }
       );
+    }
+
+    // If imageUrl is not provided, we need to get the existing one
+    if (!updateData.imageUrl) {
+      const existingProject = await Project.findById(id);
+      if (existingProject) {
+        updateData.imageUrl = existingProject.imageUrl;
+      } else {
+        return NextResponse.json(
+          { message: "Project not found" },
+          { status: 404 }
+        );
+      }
     }
 
     const project = await Project.findByIdAndUpdate(

@@ -18,6 +18,13 @@ export const metadata = {
   keywords: ["fullstack developer", "web development", "mobile development", "desktop development", "UI/UX design", "database management", "SEO", "AI & Machine Learning", "C/C++"],
   authors: [{ name: "Denzel Kariuki Ndegwa" }],
   creator: "Denzel Kariuki Ndegwa",
+  icons: {
+    icon: [
+      { url: '/icons/mandrill-vector.svg' }
+    ],
+    shortcut: '/icons/mandrill-vector.svg',
+    apple: '/icons/mandrill-vector.svg',
+  },
   openGraph: {
     title: "Mandrill Technologies | Denzel Kariuki Ndegwa",
     description: "Fullstack developer specializing in web, mobile, and desktop development. Transforming ideas into digital experiences.",
@@ -31,6 +38,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <link rel="icon" href="/icons/mandrill-vector.svg" type="image/svg+xml" />
+        <link rel="alternate icon" href="/favicon.ico" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

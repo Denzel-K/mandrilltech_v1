@@ -5,7 +5,8 @@ import Project from "@/app/lib/models/Project";
 // GET a single project by ID
 export async function GET(request, { params }) {
   try {
-    const { id } = params;
+    // In Next.js 14+, params is a Promise-like object
+    const id = params.id;
 
     if (!id) {
       return NextResponse.json(

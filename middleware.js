@@ -37,7 +37,7 @@ export function middleware(request) {
   return NextResponse.next();
 }
 
-// Export middleware config
-export const config = {
-  matcher: ['/admin/:path*', `/${process.env.ADMIN_SECRET_PATH || 'secret-mandrill-admin-dashboard'}/:path*`],
-};
+// // Export middleware config
+// export const config = {
+//   matcher: ['/admin/:path*', `/${process.env.ADMIN_SECRET_PATH || 'secret-mandrill-admin-dashboard'}/:path*`],
+// };

@@ -29,6 +29,9 @@ const ProjectSchema = new mongoose.Schema({
   githubUrl: {
     type: String,
   },
+  downloadUrl: {
+    type: String,
+  },
   featured: {
     type: Boolean,
     default: false,

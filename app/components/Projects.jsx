@@ -206,12 +206,12 @@ const ProjectCard = ({ project }) => {
       <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-transparent to-secondary/20 rounded-xl opacity-0 group-hover:opacity-100 blur-xl transition-all duration-200 -z-10 group-hover:translate-y-4"></div>
 
       <div className="relative h-48 overflow-hidden">
-        <Image
-          src={project.imageUrl}
-          alt={project.title}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-110 opacity-80"
-        />
+        {/* Use a div with background-image instead of Image component to avoid hostname issues */}
+        <div
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110 opacity-80"
+          style={{ backgroundImage: `url(${project.imageUrl})` }}
+        ></div>
+
         <div className="absolute top-2 right-2">
           <span className="px-3 py-1 text-xs rounded-full glass backdrop-blur-md border border-white/10">
             {project.category}
