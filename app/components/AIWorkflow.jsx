@@ -67,7 +67,7 @@ const AIWorkflow = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="glass p-6 rounded-xl border border-white/5 hover:border-primary/20 transition-all duration-300 group"
+              className="glass p-4 md:p-6 rounded-xl border border-white/5 hover:border-primary/20 transition-all duration-300 group"
             >
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg md:text-xl font-semibold text-gradient-full">{step.title}</h3>
@@ -75,7 +75,7 @@ const AIWorkflow = () => {
                   {step.icon}
                 </div>
               </div>
-              <p className="text-sm md:text-base text-gray-300">{step.description}</p>
+              <p className="text-xs md:text-base text-gray-400">{step.description}</p>
             </motion.div>
           ))}
         </div>

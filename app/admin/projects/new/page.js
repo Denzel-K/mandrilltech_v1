@@ -23,6 +23,7 @@ export default function NewProjectPage() {
     githubUrl: "",
     downloadUrl: "",
     featured: false,
+    inProgress: false,
   });
 
   const [techInput, setTechInput] = useState("");
@@ -417,7 +418,7 @@ export default function NewProjectPage() {
               />
             </div>
 
-            <div className="mb-8">
+            <div className="mb-8 space-y-4">
               <label className="flex items-center">
                 <input
                   type="checkbox"
@@ -427,6 +428,17 @@ export default function NewProjectPage() {
                   className="h-4 w-4 rounded text-primary focus:ring-primary"
                 />
                 <span className="ml-2 text-sm">Feature this project on your portfolio</span>
+              </label>
+
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  name="inProgress"
+                  checked={formData.inProgress}
+                  onChange={handleChange}
+                  className="h-4 w-4 rounded text-yellow-500 focus:ring-yellow-500"
+                />
+                <span className="ml-2 text-sm">Mark as "In Progress"</span>
               </label>
             </div>
 

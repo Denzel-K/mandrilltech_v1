@@ -67,7 +67,7 @@ const AIBenefits = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="glass p-6 rounded-xl border border-white/5 hover:border-secondary/20 transition-all duration-300 group"
+              className="glass p-4 md:p-6 rounded-xl border border-white/5 hover:border-secondary/20 transition-all duration-300 group"
             >
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg md:text-xl font-semibold">{benefit.title}</h3>
@@ -75,7 +75,7 @@ const AIBenefits = () => {
                   {benefit.icon}
                 </div>
               </div>
-              <p className="text-sm md:text-base text-foreground/70">{benefit.description}</p>
+              <p className="text-xs md:text-base text-gray-400">{benefit.description}</p>
             </motion.div>
           ))}
         </div>

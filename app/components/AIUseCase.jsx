@@ -97,7 +97,7 @@ const AIUseCase = () => {
               className="space-y-2"
             >
               <h3 className="hidden md:block text-xl font-bold mb-4 text-accent">Select a Use Case:</h3>
-              <h3 className="md:hidden text-lg text-center font-bold mb-4 text-accent-light">See use cases</h3>
+              <h3 className="md:hidden text-lg text-center font-bold mb-4 text-gray-500">See use cases</h3>
               {useCases.map((useCase, index) => (
                 <div
                   key={index}

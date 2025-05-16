@@ -112,8 +112,6 @@ const BusinessHero = () => {
         </motion.div>
       ))}
 
-      {/* Animated scroll down arrow */}
-      {/* <AnimatedArrow /> */}
 
       {/* Content Container */}
       <div className={styles.contentContainer}>

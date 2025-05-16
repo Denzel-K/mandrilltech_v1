@@ -108,13 +108,13 @@ const Hero = () => {
             </motion.h1>
             <motion.h2
               variants={itemVariants}
-              className="text-2xl md:text-4xl font-semibold mb-6 text-gray-300"
+              className="text-2xl md:text-4xl font-semibold mb-4 md:mb-6 text-gray-300"
             >
               I&apos;m a Software Developer
             </motion.h2>
             <motion.p
               variants={itemVariants}
-              className="text-sm md:text-lg mb-8 max-w-xl text-foreground/80 text-gray-400"
+              className="text-sm md:text-lg mb-6 md:mb-8 max-w-xl text-foreground/80 text-gray-400"
             >
               Proficient in building and designing specialized digital
               experiences for any platform. I transform ideas into engaging,

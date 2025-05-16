@@ -36,6 +36,10 @@ const ProjectSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  inProgress: {
+    type: Boolean,
+    default: false,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

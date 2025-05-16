@@ -32,6 +32,7 @@ export async function POST(request) {
       githubUrl: data.githubUrl,
       downloadUrl: data.downloadUrl,
       featured: data.featured || false,
+      inProgress: data.inProgress || false,
     });
 
     await project.save();

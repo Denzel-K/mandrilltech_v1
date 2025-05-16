@@ -67,12 +67,12 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 flex items-center justify-center">
+            <div className="w-8 md:w-10 h-8 md:h-10 flex items-center justify-center">
               <Image
                 src="/icons/mandrill-vector.svg"
                 alt="Mandrill Technologies Logo"
-                width={40}
-                height={40}
+                width={32}
+                height={32}
                 className="w-full h-full object-contain"
               />
             </div>
@@ -82,34 +82,34 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             <Link
               href="/"
-              className="text-foreground hover:text-primary transition-colors"
+              className="text-sm lg:text-base text-foreground hover:text-primary transition-colors"
             >
               Home
             </Link>
             <Link
               href="/#expertise"
-              className="text-foreground hover:text-primary transition-colors"
+              className="text-sm lg:text-base text-foreground hover:text-primary transition-colors"
             >
               Expertise
             </Link>
             <Link
               href="/#projects"
-              className="text-foreground hover:text-primary transition-colors"
+              className="text-sm lg:text-base text-foreground hover:text-primary transition-colors"
             >
               Projects
             </Link>
             <Link
               href="/business"
-              className="text-foreground hover:text-primary transition-colors"
+              className="text-sm lg:text-base text-foreground hover:text-primary transition-colors"
             >
               Business
             </Link>
             <Link
               href="/ai"
-              className="text-foreground hover:text-primary transition-colors"
+              className="text-sm lg:text-base text-foreground hover:text-primary transition-colors"
             >
               Me + AI
             </Link>

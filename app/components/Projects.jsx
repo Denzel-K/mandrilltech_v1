@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import Image from "next/image";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { FiMonitor, FiSmartphone, FiLayers, FiGrid } from "react-icons/fi";
 import { FaDesktop, FaDownload, FaExternalLinkAlt, FaGithub } from "react-icons/fa";
@@ -13,6 +12,9 @@ const Projects = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeCategory, setActiveCategory] = useState("All");
+  const [filteredProjects, setFilteredProjects] = useState([]);
+  const [isVisible, setIsVisible] = useState(true);
+  const prevCategoryRef = useRef("All");
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -43,6 +45,35 @@ const Projects = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Update filtered projects whenever projects or activeCategory changes
+  useEffect(() => {
+    // Only update if we have projects
+    if (projects.length > 0) {
+      // Store the previous category before updating
+      prevCategoryRef.current = activeCategory;
+
+      // Force a re-render by toggling visibility
+      setIsVisible(false);
+
+      // Set the filtered projects based on category
+      setTimeout(() => {
+        if (activeCategory === "All") {
+          setFilteredProjects(projects);
+        } else {
+          setFilteredProjects(projects.filter(project => project.category === activeCategory));
+        }
+
+        // Make visible again after a short delay
+        setTimeout(() => {
+          setIsVisible(true);
+        }, 50);
+      }, 50);
+    } else if (projects.length === 0) {
+      // If there are no projects, set filtered projects to empty array
+      setFilteredProjects([]);
+    }
+  }, [projects, activeCategory]);
+
   const categories = [
     { id: "All", label: "All", icon: <FiGrid className="mr-2" /> },
     { id: "Web", label: "Web", icon: <FiMonitor className="mr-2" /> },
@@ -51,29 +82,12 @@ const Projects = () => {
     { id: "Other", label: "Other", icon: <FiLayers className="mr-2" /> }
   ];
 
-  const filteredProjects =
-    activeCategory === "All"
-      ? projects
-      : projects.filter((project) => project.category === activeCategory);
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeInOut",
       },
     },
   };
@@ -113,7 +127,14 @@ const Projects = () => {
           {categories.map((category) => (
             <button
               key={category.id}
-              onClick={() => setActiveCategory(category.id)}
+              onClick={() => {
+                // Only update if it's a different category
+                if (category.id !== activeCategory) {
+                  setActiveCategory(category.id);
+                  // Force immediate re-render
+                  setIsVisible(false);
+                }
+              }}
               className={`px-4 py-[6px] rounded-md transition-all flex items-center ${
                 activeCategory === category.id
                   ? "bg-primary text-white"
@@ -141,35 +162,45 @@ const Projects = () => {
             animate={{ opacity: 1 }}
             className="text-center py-20 glass rounded-xl"
           >
-            <h3 className="text-2xl font-semibold mb-2">No Projects Yet</h3>
+            <h3 className="text-2xl font-semibold mb-2">No Projects Found</h3>
             <p className="text-foreground/70">
-              Projects will be added soon. Check back later!
+              {activeCategory === "All"
+                ? "Projects will be added soon. Check back later!"
+                : `No ${activeCategory} projects found. Try another category.`}
             </p>
           </motion.div>
         ) : (
           <motion.div
             className={styles.projectsContainer}
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20 }}
+            key={`container-${activeCategory}`}
             transition={{
               duration: 0.8,
               ease: [0.19, 1, 0.22, 1]
             }}
           >
-
             <div className={styles.projectsInner}>
-              <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 pb-4"
-              >
-                {filteredProjects.map((project) => (
-                  <ProjectCard key={project._id} project={project} />
-                ))}
-              </motion.div>
+              <AnimatePresence mode="wait">
+                {isVisible && (
+                  <motion.div
+                    key={`grid-${activeCategory}`}
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit={{ opacity: 0 }}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 pb-4"
+                  >
+                    {filteredProjects.map((project) => (
+                      <ProjectCard
+                        key={`${activeCategory}-${project._id}`}
+                        project={project}
+                      />
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
         )}
@@ -179,12 +210,19 @@ const Projects = () => {
 };
 
 const ProjectCard = ({ project }) => {
+  // Define card animation variants
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 }
+    }
+  };
+
   return (
     <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0 },
-      }}
+      variants={cardVariants}
       whileHover={{
         scale: 1.03,
         boxShadow: "0 20px 40px -15px rgba(58,134,255,0.4)",
@@ -212,10 +250,15 @@ const ProjectCard = ({ project }) => {
           style={{ backgroundImage: `url(${project.imageUrl})` }}
         ></div>
 
-        <div className="absolute top-2 right-2">
+        <div className="absolute top-2 right-2 flex flex-col gap-2 items-end">
           <span className="px-3 py-1 text-xs rounded-full glass backdrop-blur-md border border-white/10">
             {project.category}
           </span>
+          {project.inProgress && (
+            <span className="px-3 py-1 text-xs rounded-full bg-yellow-500/70 text-black font-medium backdrop-blur-md border border-yellow-400/30">
+              In Progress
+            </span>
+          )}
         </div>
 
         {/* Overlay gradient over thumbnail on hover */}
