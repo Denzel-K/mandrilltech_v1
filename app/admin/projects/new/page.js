@@ -438,7 +438,7 @@ export default function NewProjectPage() {
                   onChange={handleChange}
                   className="h-4 w-4 rounded text-yellow-500 focus:ring-yellow-500"
                 />
-                <span className="ml-2 text-sm">Mark as "In Progress"</span>
+                <span className="ml-2 text-sm">Mark as &quot;In Progress&quot;</span>
               </label>
             </div>
 

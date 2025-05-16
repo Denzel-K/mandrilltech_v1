@@ -37,6 +37,7 @@ export default function EditProjectPage({ params }) {
 
   useEffect(() => {
     fetchProject();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const fetchProject = async () => {
@@ -182,7 +183,8 @@ export default function EditProjectPage({ params }) {
         liveUrl: formData.liveUrl || "",
         githubUrl: formData.githubUrl || "",
         downloadUrl: formData.downloadUrl || "",
-        featured: formData.featured
+        featured: formData.featured,
+        inProgress: formData.inProgress
       };
 
       // Only include imageUrl if it's not empty
@@ -533,7 +535,7 @@ export default function EditProjectPage({ params }) {
                   onChange={handleChange}
                   className="h-4 w-4 rounded text-yellow-500 focus:ring-yellow-500"
                 />
-                <span className="ml-2 text-sm">Mark as "In Progress"</span>
+                <span className="ml-2 text-sm">Mark as &quot;In Progress&quot;</span>
               </label>
             </div>
 
