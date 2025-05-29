@@ -17,7 +17,7 @@ export default function Home() {
     // Simulate loading time and ensure all components are ready
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 6000); // 5 seconds loading time
+    }, 5000); // 5 seconds loading time
 
     return () => clearTimeout(timer);
   }, []);

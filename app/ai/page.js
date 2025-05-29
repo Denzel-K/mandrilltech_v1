@@ -21,7 +21,7 @@ export default function AIPage() {
     // Simulate loading time and ensure all components are ready
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000); // 2 seconds loading time
+    }, 5000); // 5 seconds loading time
 
     return () => clearTimeout(timer);
   }, []);
