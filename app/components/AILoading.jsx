@@ -5,7 +5,7 @@ import Loading from "./Loading";
 const AILoading = () => {
   return (
     <Loading 
-      message="Loading AI Solutions" 
+      message="Loading AI Integration" 
       variant="ai"
     />
   );
