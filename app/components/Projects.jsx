@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { FiMonitor, FiSmartphone, FiLayers, FiGrid } from "react-icons/fi";
@@ -245,10 +246,17 @@ const ProjectCard = ({ project }) => {
 
       <div className="relative h-48 overflow-hidden">
         {/* Use a div with background-image instead of Image component to avoid hostname issues */}
-        <div
+        {/*<div
           className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110 opacity-80"
           style={{ backgroundImage: `url(${project.imageUrl})` }}
-        ></div>
+        ></div> */}
+        <Image
+          src={project.imageUrl}
+          alt={project.title}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover object-center transition-transform duration-500 group-hover:scale-110 opacity-80"
+        />
 
         <div className="absolute top-2 right-2 flex flex-col gap-2 items-end">
           <span className="px-3 py-1 text-xs rounded-full glass backdrop-blur-md border border-white/10">
